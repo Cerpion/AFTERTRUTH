@@ -1,13 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
-public class Movement : MonoBehaviour
+//public class Inventory : MonoBehaviour
+//{
+
+//}
+
+public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerInputAction _inputs;
     [SerializeField] private CharacterController _characterController;
+    [SerializeField] private InteractionCheck _interactionCheck;
+    [SerializeField] private InputHandler _inputHandler;
 
-    [SerializeField] private float _speed;
+    [SerializeField] private float _currentSpeed;
+    [SerializeField] private float _normalSpeed = 2.6f;
+    [SerializeField] private float _runSpeed = 3.6f;
     [SerializeField] private Transform _camera;
     [SerializeField] private Transform _cameraTarget;
     [SerializeField] private Vector3 _movement;
@@ -18,15 +25,47 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _pitch;
     [SerializeField] private float _acceleration;
 
-    void Awake()
+    public bool _lockMovement;
+
+    private void Start()
     {
-        _inputs = new PlayerInputAction();
-        _inputs.Enable();
+        _inputHandler.OnInteract += Interact;
+        _inputHandler.OnSprintStart += Running;
+        _inputHandler.OnSprintCanceled += Walk;
+
+        _currentSpeed = _normalSpeed;
+    }
+
+    public void OnDestroy()
+    {
+        _inputHandler.OnInteract -= Interact;
+        _inputHandler.OnSprintStart -= Running;
+        _inputHandler.OnSprintCanceled -= Walk;
+
+    }
+
+    public void Interact()
+    {
+        _interactionCheck.Interactable?.CanInteract();
+    }
+
+    public void Running()
+    {
+        _currentSpeed = _runSpeed;
+    }
+    public void Walk()
+    {
+        _currentSpeed = _normalSpeed;
     }
 
     void Update()
     {
-        var move = _inputs.Player.Move.ReadValue<Vector2>();
+        if (_lockMovement)
+        {
+            return;
+        }
+
+        var move = _inputHandler.GetMovementInput();
 
         var cameraForward = transform.forward;
         cameraForward.y = 0;
@@ -37,7 +76,7 @@ public class Movement : MonoBehaviour
         cameraRight.Normalize();
 
         Vector3 targetMovement = cameraForward * move.y + cameraRight * move.x;
-        targetMovement *= _speed;
+        targetMovement *= _currentSpeed;
 
         _movement = Vector3.Lerp( _movement, targetMovement, _acceleration * Time.deltaTime);
 
@@ -54,11 +93,16 @@ public class Movement : MonoBehaviour
 
         _characterController.Move(_movement  * Time.deltaTime);
 
-        var look = _inputs.Player.Look.ReadValue<Vector2>();
+        var look = _inputHandler.GetMouseMoveInput();
+
         transform.Rotate(Vector3.up, look.x * _sensitivity * Time.deltaTime);
 
         _pitch -= look.y * _sensitivity * Time.deltaTime;
         _pitch = Mathf.Clamp(_pitch, -90f, 90f);
         _cameraTarget.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
+
+        _interactionCheck.GetInteractableTarget();
     }
+
+   
 }
