@@ -9,7 +9,7 @@ public class InspectPuzzle : Interactable
     [SerializeField] private string _information;
 
     [SerializeField] private InspectionSystem _inspectionSystem;
-    public override void CanInteract()
+    public override void StartInteraction()
     {
         if (_requiredItems != "")
         {
@@ -17,6 +17,6 @@ public class InspectPuzzle : Interactable
             return;
         }
 
-        _inspectionSystem.StartInspect(_itemID);
+        //_inspectionSystem.StartInspect();
     }
 }

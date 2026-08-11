@@ -4,20 +4,23 @@ public abstract class Interactable : MonoBehaviour
 {
     [SerializeField]public InteractionView _interactionView;
 
-    public virtual void CanInteract() {}
+    public virtual void StartInteraction() {}
+    public virtual void ExitInteraction() {}
 }
 
-//public class Collectable : Interactable
-//{
-//    public override void CanInteract()
-//    {
+public class InteractionHandler : MonoBehaviour
+{
+    [SerializeField] private GameState _gameState;
+    private Interactable _currentItem;
 
-//    }
-//}
+    public void StartInteraction()
+    {
 
-//public class FixedPuzzle : Interactable
-//{
-//    public override void CanInteract()
-//    {
-//    }
-//}
+    }
+
+    public void CancelInteraction()
+    {
+
+    }
+
+}

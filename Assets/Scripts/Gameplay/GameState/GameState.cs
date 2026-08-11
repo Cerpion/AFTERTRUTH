@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
     {
         _stateMachine = new StateMachine<GameStates>();
         _stateMachine.AddState(GameStates.Gameplay, new GamePlayState());
-        _stateMachine.AddState(GameStates.Puzzle, new PuzzleState(_player));
+        _stateMachine.AddState(GameStates.Puzzle, new InteractionState(_player));
         _stateMachine.Initialize(GameStates.Gameplay);
     }
 
@@ -37,10 +37,10 @@ public class GamePlayState : State<GameStates>
     }
 }
 
-public class PuzzleState : State<GameStates>
+public class InteractionState : State<GameStates>
 {
     private readonly Player _player;
-    public PuzzleState(Player player)
+    public InteractionState(Player player)
     {
         _player = player;
     }

@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     public void Interact()
     {
-        _interactionCheck.Interactable?.CanInteract();
+        _interactionCheck.Interactable?.StartInteraction();
     }
 
     public void Running()

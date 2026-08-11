@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectExamination : MonoBehaviour
@@ -11,7 +9,7 @@ public class ObjectExamination : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 100f;
 
     private void Awake()
-    {
+    { 
         _inputHandler.OnCancel += HideInpection;
     }
 
