@@ -117,13 +117,13 @@ public class InteractionCheck : MonoBehaviour
 
     private bool IsLookingAt(Interactable interactable)
     {
-        Vector3 directionToObject =
-            interactable.transform.position - transform.position;
+        var directionToObject = interactable.transform.position - transform.position;
+        directionToObject.y = 0f;
 
-        float angle = Vector3.Angle(
-            transform.forward,
-            directionToObject
-        );
+        var forward = transform.forward;
+        forward.y = 0f;
+
+        float angle = Vector3.Angle(forward, directionToObject);
 
         return angle <= _interactionAngle;
     }

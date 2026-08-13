@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Collectable : Interactable
 {
-    [SerializeField] private string _itemID;
+    [SerializeField] private ItemID _itemID;
     [SerializeField] private Player _player;
 
     public override void StartInteraction()
     {
         //Open Investigation
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
-        ServiceLocator.Instance.GetService<InspectionSystem>().StartInspect();
+        ServiceLocator.Instance.GetService<InspectionSystem>().StartInspect(_itemID.ID);
     }
 
     public override void ExitInteraction()

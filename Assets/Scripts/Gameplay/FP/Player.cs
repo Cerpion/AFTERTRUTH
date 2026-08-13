@@ -1,17 +1,15 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-
-//public class Inventory : MonoBehaviour
-//{
-
-//}
 
 public class Player : MonoBehaviour
 {
+    public Inventory Inventory { get => _inventory; }
+
     private InputHandler _inputHandler;
 
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private InteractionCheck _interactionCheck;
+    [SerializeField] private Inventory _inventory;
+
 
     [SerializeField] private float _currentSpeed;
     [SerializeField] private float _normalSpeed = 2.6f;
@@ -32,6 +30,7 @@ public class Player : MonoBehaviour
     {
         _currentSpeed = _normalSpeed;
         _inputHandler = ServiceLocator.Instance.GetService<InputHandler>();
+
 
         StartInput();
     }
