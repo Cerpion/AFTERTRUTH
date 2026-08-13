@@ -369,6 +369,11 @@ MonoBehaviour:
     lines:
     - Hola soy Lau, me gusta el helado
     - Y EL CHOCOLATE
+    timeBetweenLines: 2
+  - dialogueName: trauma
+    lines:
+    - por que el tiene la foto
+    timeBetweenLines: 2
   dialogueContainer: {fileID: 2147397133}
   dialogueText: {fileID: 356427482}
   charactersPerSecond: 20

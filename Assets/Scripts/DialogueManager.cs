@@ -14,6 +14,9 @@ public class DialogueManager : MonoBehaviour
 
         [TextArea(2, 5)]
         public List<string> lines = new List<string>();
+
+        [Header("Time Between Lines")]
+        public float timeBetweenLines = 2f;
     }
 
     [Header("Dialogue Database")]
@@ -29,14 +32,13 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     private int currentLineIndex;
 
-    private Coroutine typewriterCoroutine;
+    private Coroutine dialogueCoroutine;
 
     private bool isTyping;
     private bool dialogueFinished;
 
     private void Awake()
     {
-        // Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -45,25 +47,15 @@ public class DialogueManager : MonoBehaviour
 
         Instance = this;
 
-        // Hide dialogue when the game starts
         dialogueContainer.SetActive(false);
     }
 
     private void Update()
     {
-        //TEST DIALOGUE
+        // TEST DIALOGUE
         if (Input.GetKeyDown(KeyCode.P))
         {
             DialogueManager.Instance.Play("Hola");
-        }
-        //TEST DIALOGUE
-
-        if (!dialogueContainer.activeSelf)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            HandleInput();
         }
     }
 
@@ -105,10 +97,10 @@ public class DialogueManager : MonoBehaviour
 
     public void Stop()
     {
-        if (typewriterCoroutine != null)
+        if (dialogueCoroutine != null)
         {
-            StopCoroutine(typewriterCoroutine);
-            typewriterCoroutine = null;
+            StopCoroutine(dialogueCoroutine);
+            dialogueCoroutine = null;
         }
 
         currentDialogue = null;
@@ -133,10 +125,10 @@ public class DialogueManager : MonoBehaviour
         if (dialogue == null || dialogue.lines.Count == 0)
             return;
 
-        // Stop any dialogue currently playing
-        if (typewriterCoroutine != null)
+        // Stop current dialogue if there is one
+        if (dialogueCoroutine != null)
         {
-            StopCoroutine(typewriterCoroutine);
+            StopCoroutine(dialogueCoroutine);
         }
 
         currentDialogue = dialogue;
@@ -146,21 +138,25 @@ public class DialogueManager : MonoBehaviour
 
         dialogueContainer.SetActive(true);
 
-        typewriterCoroutine = StartCoroutine(ShowLine());
+        dialogueCoroutine = StartCoroutine(PlayDialogue());
     }
 
-    private void NextLine()
+    private IEnumerator PlayDialogue()
     {
-        currentLineIndex++;
-
-        // Dialogue finished
-        if (currentLineIndex >= currentDialogue.lines.Count)
+        while (currentLineIndex < currentDialogue.lines.Count)
         {
-            Stop();
-            return;
+            // Show current line
+            yield return StartCoroutine(ShowLine());
+
+            // Wait after the line has finished typing
+            yield return new WaitForSecondsRealtime(
+                currentDialogue.timeBetweenLines
+            );
+
+            currentLineIndex++;
         }
 
-        typewriterCoroutine = StartCoroutine(ShowLine());
+        Stop();
     }
 
     // =========================================================
@@ -187,47 +183,5 @@ public class DialogueManager : MonoBehaviour
 
         isTyping = false;
         dialogueFinished = true;
-
-        typewriterCoroutine = null;
-    }
-
-    private void SkipTypewriter()
-    {
-        if (currentDialogue == null)
-            return;
-
-        if (typewriterCoroutine != null)
-        {
-            StopCoroutine(typewriterCoroutine);
-            typewriterCoroutine = null;
-        }
-
-        dialogueText.text =
-            currentDialogue.lines[currentLineIndex];
-
-        isTyping = false;
-        dialogueFinished = true;
-    }
-
-    // =========================================================
-    // INPUT
-    // =========================================================
-
-    private void HandleInput()
-    {
-        // First click while typing:
-        // instantly show the complete line.
-        if (isTyping)
-        {
-            SkipTypewriter();
-            return;
-        }
-
-        // Second click:
-        // go to the next line.
-        if (dialogueFinished)
-        {
-            NextLine();
-        }
     }
 }
