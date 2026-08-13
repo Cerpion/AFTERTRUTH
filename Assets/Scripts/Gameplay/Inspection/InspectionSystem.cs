@@ -30,6 +30,7 @@ public class InspectionSystem : MonoBehaviour
 
     public void StartInspect(string itemID)
     {
+        _currentInspectionCollectable = null;
         _objectToInspect.rotation = Quaternion.identity;
 
         Cursor.lockState = CursorLockMode.Confined;

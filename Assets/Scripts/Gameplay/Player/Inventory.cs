@@ -31,6 +31,11 @@ public class Inventory : MonoBehaviour
 
     public void TryRemove(ItemID item)
     {
+        //if (_inventory.Contains(item))
+        //{
+        //    return;
+        //}
+
         var indexItem = _inventory.IndexOf(item);
         _inventoryView.Remove(indexItem);
 

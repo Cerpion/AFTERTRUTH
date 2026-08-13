@@ -20,3 +20,6 @@ MonoBehaviour:
   - ItemID: {fileID: 11400000, guid: 70148b67fe1ec1746a091051fd1e3db3, type: 2}
     Icon: {fileID: 0}
     Prefab: {fileID: 6892128297183686151, guid: b0d3ba35603cd5e49aaf92dfb0774279, type: 3}
+  - ItemID: {fileID: 11400000, guid: bea241085f7478442837b1d2a7b48392, type: 2}
+    Icon: {fileID: 0}
+    Prefab: {fileID: 3521668037421938881, guid: 93ea0a86e8215564c96a1fa959dc8835, type: 3}

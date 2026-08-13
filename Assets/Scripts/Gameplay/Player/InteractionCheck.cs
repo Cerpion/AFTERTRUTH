@@ -7,6 +7,7 @@ public class InteractionCheck : MonoBehaviour
     [SerializeField] private List<Interactable> _interactableItem;
     [SerializeField] private float _interactionAngle = 30f;
     [SerializeField] private Interactable _currentInteractable;
+    [SerializeField] private float _initialSize = 2;
 
     public Interactable Interactable { get => _currentInteractable; }
 
@@ -24,6 +25,7 @@ public class InteractionCheck : MonoBehaviour
             return;
         }
 
+        interactableItem.OnRemoveInteractable += RemoveItem;
         _interactableItem.Add(interactableItem);
         interactableItem._interactionView.ShowPoint();
     }
@@ -34,22 +36,29 @@ public class InteractionCheck : MonoBehaviour
         {
             return;
         }
+       
+        interactableItem.OnRemoveInteractable -= RemoveItem;
+        RemoveItem(interactableItem);
+    }
 
-        if (!_interactableItem.Contains(interactableItem))
+
+    public void RemoveItem(Interactable item)
+    {
+        if (!_interactableItem.Contains(item))
         {
             Debug.LogWarning("The item does not exist.");
             return;
         }
 
-        if (_currentInteractable == interactableItem)
+        if (_currentInteractable == item)
         {
             _currentInteractable = null;
         }
 
-        interactableItem._interactionView.Hide();
-        _interactableItem.Remove(interactableItem);
-    }
+        item._interactionView.Hide();
+        _interactableItem.Remove(item);
 
+    }
 
     public void GetInteractableTarget()
     {
@@ -130,11 +139,14 @@ public class InteractionCheck : MonoBehaviour
 
     public void DeactivateInteraction()
     {
-        GetComponent<SphereCollider>().isTrigger = false;
+        //GetComponent<SphereCollider>().isTrigger = false;
+        transform.LeanScale(Vector3.zero, 0.15f);
     }
 
     public void ActivateInteraction()
     {
-        GetComponent<SphereCollider>().isTrigger = true;
+        //GetComponent<SphereCollider>().isTrigger = true;
+        transform.LeanScale(Vector3.one * _initialSize, 0.15f);
+
     }
 }

@@ -22,7 +22,7 @@ public class MusicBoxOpening : State<MusicBoxState>
         _keyItem.gameObject.SetActive(true);
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished += () => FinishInspection();
+        inspection.OnInspectionFinished +=  FinishInspection;
 
 
         _animator.Play("Open");
@@ -33,7 +33,7 @@ public class MusicBoxOpening : State<MusicBoxState>
     public override void OnExit()
     {
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished -= () => FinishInspection();
+        inspection.OnInspectionFinished -= FinishInspection;
     }
 
     public void FinishInspection()
