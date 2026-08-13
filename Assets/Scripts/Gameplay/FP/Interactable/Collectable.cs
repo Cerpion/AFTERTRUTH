@@ -7,7 +7,21 @@ public class Collectable : Interactable
 
     public override void StartInteraction()
     {
-        Debug.LogWarning("Add item To Inventory");
-        gameObject.SetActive(false);
+        //Open Investigation
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
+        ServiceLocator.Instance.GetService<InspectionSystem>().StartInspect();
     }
+
+    public override void ExitInteraction()
+    {
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
+        gameObject.SetActive(false);
+        Debug.LogWarning("Add item To Inventory");
+        //Close Investigation
+        //Add Item
+        //se puede mover
+
+    }
+
+
 }

@@ -8,9 +8,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private InputHandler _inputHandler;
+
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private InteractionCheck _interactionCheck;
-    [SerializeField] private InputHandler _inputHandler;
 
     [SerializeField] private float _currentSpeed;
     [SerializeField] private float _normalSpeed = 2.6f;
@@ -27,21 +28,28 @@ public class Player : MonoBehaviour
 
     public bool _lockMovement;
 
-    private void Start()
+    public void Start()
+    {
+        _currentSpeed = _normalSpeed;
+        _inputHandler = ServiceLocator.Instance.GetService<InputHandler>();
+
+        StartInput();
+    }
+
+    public void StartInput()
     {
         _inputHandler.OnInteract += Interact;
         _inputHandler.OnSprintStart += Running;
         _inputHandler.OnSprintCanceled += Walk;
-
-        _currentSpeed = _normalSpeed;
+        _interactionCheck.ActivateInteraction();
     }
 
-    public void OnDestroy()
+    public void StopInput()
     {
         _inputHandler.OnInteract -= Interact;
         _inputHandler.OnSprintStart -= Running;
         _inputHandler.OnSprintCanceled -= Walk;
-
+        _interactionCheck.DeactivateInteraction();
     }
 
     public void Interact()

@@ -8,7 +8,6 @@ public class InspectPuzzle : Interactable
     [SerializeField] private List<GameObject> _itemsToActivate;
     [SerializeField] private string _information;
 
-    [SerializeField] private InspectionSystem _inspectionSystem;
     public override void StartInteraction()
     {
         if (_requiredItems != "")
@@ -16,7 +15,6 @@ public class InspectPuzzle : Interactable
             //ShowDialog
             return;
         }
-
-        //_inspectionSystem.StartInspect();
+        ServiceLocator.Instance.GetService<InspectionSystem>().StartInspect();
     }
 }

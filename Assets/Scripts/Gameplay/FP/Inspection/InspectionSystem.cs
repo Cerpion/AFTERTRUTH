@@ -1,39 +1,50 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InspectionSystem : MonoBehaviour
 {
-    [SerializeField] private InputHandler _inputHandler;
-    [SerializeField] private GameState _gameState;
-
+    private InputHandler _inputHandler;
     [SerializeField] private Transform _objectToInspect;
     [SerializeField] private float _rotationSpeed = 100f;
 
     [SerializeField] private bool canInspect;
+    public Action OnInspectionFinished;
+
+    private void Start()
+    {
+        _inputHandler = ServiceLocator.Instance.GetService<InputHandler>();
+    }
 
     public void StartInspect()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
-        _gameState.ChangeState(GameStates.Puzzle);
-
         canInspect = true;
         gameObject.SetActive(true);
 
-        _inputHandler.OnCancel += EndInspect;
-        _inputHandler.OnLeftMousePressed += TryInteract;
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+
+        input.OnInteract += EndInspect;
+        input.OnLeftMousePressed += TryInteract;
 
     }
     public void EndInspect()
     {
+        Debug.Log("End Inspection");
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         gameObject.SetActive(false);
-        _gameState.ChangeState(GameStates.Gameplay);
-        _inputHandler.OnCancel -= EndInspect;
-        _inputHandler.OnLeftMousePressed -= TryInteract;
+
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+
+        input.OnInteract -= EndInspect;
+        input.OnLeftMousePressed -= TryInteract;
+
+        OnInspectionFinished?.Invoke();
     }
 
     private void Update()
@@ -54,11 +65,11 @@ public class InspectionSystem : MonoBehaviour
 
     private void TryInteract()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            // Code to interact with hit.collider.gameObject
-        }
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out RaycastHit hit))
+        //{
+        //    // Code to interact with hit.collider.gameObject
+        //}
     }
 }
 

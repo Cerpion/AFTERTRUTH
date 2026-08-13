@@ -23,7 +23,15 @@ public class StateMachine<State> where State : Enum
     {
         _currentStateId = initialState;
         _currentState = _idToState[initialState];
+    }
+    public void EnterCurrentState()
+    {
         _currentState.OnEnter();
+    }
+
+    public void ExitCurrentState()
+    {
+        _currentState.OnExit();
     }
 
     public void Update(float delta)

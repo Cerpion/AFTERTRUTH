@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -125,5 +126,15 @@ public class InteractionCheck : MonoBehaviour
         );
 
         return angle <= _interactionAngle;
+    }
+
+    public void DeactivateInteraction()
+    {
+        GetComponent<SphereCollider>().isTrigger = false;
+    }
+
+    public void ActivateInteraction()
+    {
+        GetComponent<SphereCollider>().isTrigger = true;
     }
 }

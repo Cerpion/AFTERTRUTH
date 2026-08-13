@@ -1,49 +1,61 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Windows;
 
-public enum Directions
+public enum MusicBoxDirections
 {
-    Up, Down, Left, Right
+    Left, Right
 }
 
-public class MusicBox : Interactable
+public enum MusicBoxState
 {
-    [SerializeField] private GameState _gameState;
-    [SerializeField] private InputHandler _inputHandler;
+    Closed,
+    Opening,
+    Open,
+}
 
-    [Header("Configuration")]
-    [SerializeField] private CinemachineCamera _camera;
-    [SerializeField] private Directions[] _sequence;
+public class MusicBoxClosed : State<MusicBoxState>
+{
+    private readonly MusicBoxDirections[] _sequence;
+    private readonly MusicBoxAudioHandler _musicBoxAudio;
+    private readonly Action OnExitInteraction;
+    private readonly Transform _key;
+
     private int _index;
     private bool _lockInput;
 
-    [Header("Visual")]
-    [SerializeField] private Transform _key;
-    [SerializeField] private AudioSource _music;
-    [SerializeField] private AudioClip _keyMove;
-    [SerializeField] private AudioClip _open;
 
-    [SerializeField] private Interactable _keyItem;
-
-    public override void StartInteraction()
+    public MusicBoxClosed(MusicBoxDirections[] sequence, MusicBoxAudioHandler musicBoxAudio, Action onExitInteraction, Transform key)
     {
-        _inputHandler.OnLeftButton += MoveLeft;
-        _inputHandler.OnRightButton += MoveRight;
-        _inputHandler.OnCancel += ExitInteraction;
-
-        _interactionView.Hide();
-        _camera.Priority = 100;
-        _gameState.ChangeState(GameStates.Puzzle);
+        _sequence = sequence;
+        _musicBoxAudio = musicBoxAudio;
+        OnExitInteraction = onExitInteraction;
+        _key = key;
     }
-    public override void ExitInteraction()
-    {
-        _inputHandler.OnLeftButton -= MoveLeft;
-        _inputHandler.OnRightButton -= MoveRight;
-        _inputHandler.OnCancel -= ExitInteraction;
 
-        _interactionView.ShowInput();
-        _camera.Priority = 0;
-        _gameState.ChangeState(GameStates.Gameplay);
+    public override void OnEnter()
+    {
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+
+        input.OnLeftButton += MoveLeft;
+        input.OnRightButton += MoveRight;
+        input.OnInteract += ExitInteraction;
+    }
+
+    public override void OnExit()
+    {
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+        input.OnLeftButton -= MoveLeft;
+        input.OnRightButton -= MoveRight;
+        input.OnInteract -= ExitInteraction;
+
+        Reset();
+    }
+
+    public void ExitInteraction()
+    {
+        OnExitInteraction?.Invoke();
     }
 
     private void MoveLeft()
@@ -51,7 +63,7 @@ public class MusicBox : Interactable
         if (_lockInput)
             return;
 
-        VerifySequence(Directions.Left);
+        VerifySequence(MusicBoxDirections.Left);
     }
 
     private void MoveRight()
@@ -59,10 +71,10 @@ public class MusicBox : Interactable
         if (_lockInput)
             return;
 
-        VerifySequence(Directions.Right);
+        VerifySequence(MusicBoxDirections.Right);
     }
 
-    private void VerifySequence(Directions direction)
+    private void VerifySequence(MusicBoxDirections direction)
     {
         _lockInput = true;
 
@@ -75,8 +87,7 @@ public class MusicBox : Interactable
             if (_index >= _sequence.Length)
             {
                 Debug.Log("Finish");
-                _music.PlayOneShot(_open);
-                OpenMusicBox();
+                ChangeState?.Invoke(MusicBoxState.Opening);
                 return;
             }
 
@@ -88,25 +99,111 @@ public class MusicBox : Interactable
         _index = 0;
     }
 
-    private void AnimKey(Directions direction)
+    private void AnimKey(MusicBoxDirections direction)
     {
-        _music.PlayOneShot(_keyMove);
-        float rotation = direction == Directions.Left ? 90f : -90f;
+        _musicBoxAudio.PlayRotate();
+        float rotation = direction == MusicBoxDirections.Left ? 90f : -90f;
         var sequence = LeanTween.sequence();
         sequence.append(_key.LeanRotateAround(Vector3.forward, rotation, 0.3f));
         sequence.append(() => { _lockInput = false; });
     }
 
-    private void OpenMusicBox()
+    private void Reset()
     {
-        _inputHandler.OnLeftButton -= MoveLeft;
-        _inputHandler.OnRightButton -= MoveRight;
-        _inputHandler.OnCancel -= ExitInteraction;
-
-        _keyItem.gameObject.SetActive(true);
-        _keyItem.StartInteraction();
-        _camera.Priority = 0;
-        _gameState.ChangeState(GameStates.Gameplay);
-        GetComponent<BoxCollider>().enabled = false ;
+        _index = 0;
+        _key.LeanRotateX(0, 0.3f);
+        _musicBoxAudio.PlayRotate();
     }
+}
+
+public class MusicBoxOpening : State<MusicBoxState>
+{
+    private readonly GameObject _keyItem;
+    private readonly MusicBoxAudioHandler _musicBoxAudio;
+
+    public MusicBoxOpening(GameObject keyItem, MusicBoxAudioHandler musicBoxAudio)
+    {
+        _keyItem = keyItem;
+        _musicBoxAudio = musicBoxAudio;
+    }
+
+    public override void OnEnter()
+    {
+        _musicBoxAudio.PlayOpen();
+        _keyItem.gameObject.SetActive(true);
+
+        var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
+        inspection.StartInspect();
+        inspection.OnInspectionFinished += () => { ChangeState?.Invoke(MusicBoxState.Open); };
+    }
+
+}
+
+public class MusicBoxOpen : State<MusicBoxState>
+{
+    private readonly Action OnExitInteraction;
+
+    public MusicBoxOpen(Action onExitInteraction)
+    {
+        OnExitInteraction = onExitInteraction;
+    }
+
+    public override void OnEnter()
+    {
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+        input.OnInteract += ExitInteraction;
+    }
+
+    public override void OnExit()
+    {
+        var input = ServiceLocator.Instance.GetService<InputHandler>();
+        input.OnInteract -= ExitInteraction;
+    }
+
+    public void ExitInteraction()
+    {
+        OnExitInteraction?.Invoke();
+    }
+}
+
+public class MusicBox : Interactable
+{
+    [SerializeField] private MusicBoxAudioHandler _musicBoxAudioHandler;
+    [SerializeField] private InspectionSystem _inspectionSystem;
+    [SerializeField] private MusicBoxDirections[] _sequence;
+
+    [SerializeField] private  Transform _key;
+
+    [Header("Configuration")]
+    [SerializeField] private CinemachineCamera _camera;
+
+    [SerializeField] private StateMachine<MusicBoxState> _stateMachine;
+    private Action OnExitInteraction;
+
+    private void Start()
+    {
+        OnExitInteraction = ExitInteraction;
+
+        _stateMachine = new StateMachine<MusicBoxState>();
+
+        _stateMachine.AddState(MusicBoxState.Closed, new MusicBoxClosed(_sequence, _musicBoxAudioHandler, OnExitInteraction, _key));
+        _stateMachine.AddState(MusicBoxState.Opening, new MusicBoxOpening(_key.gameObject, _musicBoxAudioHandler));
+        _stateMachine.AddState(MusicBoxState.Open, new MusicBoxOpen(OnExitInteraction));
+
+        _stateMachine.Initialize(MusicBoxState.Closed);
+    }
+
+    public override void StartInteraction()
+    {
+        _camera.Priority = 100;
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
+        _stateMachine.EnterCurrentState();
+    }
+    public override void ExitInteraction()
+    {
+        _stateMachine.ExitCurrentState();
+        _camera.Priority = 0;
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
+    }
+
 }

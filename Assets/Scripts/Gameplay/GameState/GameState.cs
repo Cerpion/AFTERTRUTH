@@ -48,10 +48,12 @@ public class InteractionState : State<GameStates>
     public override void OnEnter()
     {
         _player._lockMovement = true;
+        _player.StopInput();
     }
 
     public override void OnExit()
     {
         _player._lockMovement = false;
+        _player.StartInput();
     }
 }

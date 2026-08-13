@@ -6,7 +6,6 @@ public class InputHandler : MonoBehaviour
 {
     [SerializeField] private PlayerInputAction _inputs;
     public Action OnInteract;
-    public Action OnCancel;
     public Action OnLeftMousePressed;
     public Action OnSprintStart;
     public Action OnSprintCanceled;
@@ -22,7 +21,6 @@ public class InputHandler : MonoBehaviour
         _inputs = new PlayerInputAction();
 
         _inputs.Player.Interact.performed += Interact;
-        _inputs.Player.Cancel.performed += Cancel;
         _inputs.Player.Sprint.performed += SprintStart;
         _inputs.Player.Sprint.canceled += SprintCanceled;
         _inputs.Player.InteractMouse.performed += LeftMousePressed;
@@ -37,7 +35,6 @@ public class InputHandler : MonoBehaviour
     private void OnDestroy()
     {
         _inputs.Player.Interact.performed -= Interact;
-        _inputs.Player.Cancel.performed -= Cancel;
     }
 
     private void MovePressed(InputAction.CallbackContext obj)
@@ -73,11 +70,6 @@ public class InputHandler : MonoBehaviour
     public void Interact(InputAction.CallbackContext ctx)
     {
         OnInteract?.Invoke();
-    }
-
-    public void Cancel(InputAction.CallbackContext ctx)
-    {
-        OnCancel?.Invoke();
     }
 
     public Vector2 GetMovementInput()
