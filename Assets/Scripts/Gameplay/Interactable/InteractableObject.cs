@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class InteractableObject : Interactable
 {
-    [SerializeField] private ItemID _requiredItem;
-    [SerializeField] private string _information;
+    private ItemID _requiredItem;
+
     public Action OnInteracted;
+    public Action OnLocked;
+
+    public void SetItemsRequired(ItemID item)
+    {
+        _requiredItem = item;
+    }
 
     public override void StartInteraction()
     {
@@ -20,8 +26,7 @@ public class InteractableObject : Interactable
 
         if (!player.Inventory.ContainItem(_requiredItem))
         {
-            Debug.LogWarning(_information);
-            //ShowDialog
+            OnLocked?.Invoke();
             return;
         }
 
