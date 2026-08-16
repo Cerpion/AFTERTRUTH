@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c792d9d39af69fd48a6ecc18bf0b2bc7, type: 3}
+  m_Name: InteractiveConfiguration
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveItemsConfiguration
+  NormalItems:
+  - ItemID: {fileID: 11400000, guid: 6855855ef8eb2a645badbdcf64ee2448, type: 2}
+    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
+  InteractiveItems:
+  - ItemID: {fileID: 11400000, guid: 70148b67fe1ec1746a091051fd1e3db3, type: 2}
+    Icon: {fileID: 0}
+    Prefab: {fileID: 6892128297183686151, guid: b0d3ba35603cd5e49aaf92dfb0774279, type: 3}
+  - ItemID: {fileID: 11400000, guid: bea241085f7478442837b1d2a7b48392, type: 2}
+    Icon: {fileID: 0}
+    Prefab: {fileID: 3521668037421938881, guid: 93ea0a86e8215564c96a1fa959dc8835, type: 3}
