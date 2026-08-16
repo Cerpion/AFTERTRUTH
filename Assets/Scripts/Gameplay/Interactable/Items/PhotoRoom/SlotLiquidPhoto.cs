@@ -22,7 +22,6 @@ public class SlotLiquidPhoto : MonoBehaviour
     [SerializeField] private RectTransform _redBar;
 
     private float _timer;
-    private Photo _photo;
     private bool _processing;
 
     public bool IsReady => _timer >= _processTime;
@@ -36,9 +35,19 @@ public class SlotLiquidPhoto : MonoBehaviour
 
     public void Insert(Photo photo)
     {
-        _photo = photo;
         _timer = 0f;
         _processing = true;
+    }
+
+    public void ResetSlot()
+    {
+        _timer = 0f;
+        _processing = false;
+
+        _greenBar.localScale = Vector3.zero;
+        _redBar.localScale = Vector3.zero;
+
+        _canvasGroup.alpha = 0f;
     }
 
     public bool UpdateProcess(float delta)
@@ -70,7 +79,6 @@ public class SlotLiquidPhoto : MonoBehaviour
             return false;
 
         _processing = false;
-        _photo = null;
 
         return true;
     }
@@ -78,7 +86,6 @@ public class SlotLiquidPhoto : MonoBehaviour
     public void Remove()
     {
         _processing = false;
-        _photo = null;
         _timer = 0f;
     }
     public void Show()

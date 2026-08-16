@@ -20,6 +20,9 @@ public class Collectable : Interactable
         gameObject.SetActive(false);
         ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
+
+        var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
+        inspection.OnInspectionFinished -= ExitInteraction;
     }
 
 

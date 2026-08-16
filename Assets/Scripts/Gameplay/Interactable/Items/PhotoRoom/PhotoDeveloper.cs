@@ -45,7 +45,7 @@ public class PhotoDeveloper : Interactable
         _stateMachine = new StateMachine<PhotoDeveloperState>();
 
         _stateMachine.AddState(PhotoDeveloperState.FillingLiquids, new FillingLiquidsState(OnExitInteraction, _liquidLayer, _liquids));
-        _stateMachine.AddState(PhotoDeveloperState.Developing, new DevelopingState(OnExitInteraction, _liquidLayer, _slots));
+        _stateMachine.AddState(PhotoDeveloperState.Developing, new DevelopingState(OnExitInteraction, _liquidLayer, _slots, _photo));
         _stateMachine.AddState(PhotoDeveloperState.Completed, new CompletedState(OnExitInteraction, _itemReward, _photo));
 
         _stateMachine.Initialize(PhotoDeveloperState.FillingLiquids);
@@ -55,6 +55,7 @@ public class PhotoDeveloper : Interactable
         _interactableObject.OnInteracted += Interacted;
 
         GetComponent<BoxCollider>().enabled = false;
+        _photo.gameObject.SetActive(false);
         foreach (var item in _liquids)
         {
             item.gameObject.SetActive(false);
@@ -111,6 +112,7 @@ public class DevelopingState : State<PhotoDeveloperState>
 {
     private readonly Action OnExitInteraction;
     private readonly LayerMask _liquidLayer;
+    private readonly Photo _photoGo;
 
     private readonly SlotLiquidPhoto[] _slots;
 
@@ -119,17 +121,29 @@ public class DevelopingState : State<PhotoDeveloperState>
     private bool _isDragging;
     private int _completedSlots;
 
-    public DevelopingState(Action onExitInteraction, LayerMask liquidLayer, SlotLiquidPhoto[] slots)
+    public DevelopingState(Action onExitInteraction, LayerMask liquidLayer, SlotLiquidPhoto[] slots, Photo photo)
     {
         OnExitInteraction = onExitInteraction;
         _liquidLayer = liquidLayer;
         _slots = slots;
-
         _camera = Camera.main;
+        _photoGo = photo;
     }
 
     public override void OnEnter()
     {
+        _isDragging = false;
+        _photo = null;
+        _completedSlots = 0;
+
+        _photoGo.gameObject.SetActive(true);
+        _photoGo.ResetPhoto();
+
+        foreach (var slot in _slots)
+        {
+            slot.ResetSlot();
+        }
+
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract += ExitInteraction;
     }
@@ -177,7 +191,7 @@ public class DevelopingState : State<PhotoDeveloperState>
         {
             if (slot.UpdateProcess(delta))
             {
-                Debug.Log("RECETA DAÑADA");
+                //Debug.Log("RECETA DAÑADA");
                 ExitInteraction();
                 return;
             }
@@ -195,9 +209,7 @@ public class DevelopingState : State<PhotoDeveloperState>
             return;
 
         _photo?.UnSelect();
-
         _photo = target;
-
         _photo?.Select();
     }
 
@@ -350,6 +362,7 @@ public class FillingLiquidsState : State<PhotoDeveloperState>
             foreach (var liquid in _liquids)
             {
                 liquid.gameObject.SetActive(true);
+                liquid.ReturnToOriginalPosition();
             }
 
             _points = 0;

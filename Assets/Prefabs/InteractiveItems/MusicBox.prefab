@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
   _interactionView: {fileID: 4232518193380144550}
-  _itemID: 
+  _itemID: {fileID: 0}
   _player: {fileID: 0}
 --- !u!1 &4501389118435216698
 GameObject:
@@ -622,8 +622,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.4, z: 0.6}
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Size: {x: 0.4, y: 0.3543678, z: 0.3751394}
+  m_Center: {x: 0, y: 0.17281613, z: 0}
 --- !u!114 &3616249501021756796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +643,7 @@ MonoBehaviour:
   _animator: {fileID: 7256785294228181305}
   _key: {fileID: 1564773963490385697}
   _keyCollectable: {fileID: 3435940469842321149}
+  _itemID: {fileID: 11400000, guid: 6855855ef8eb2a645badbdcf64ee2448, type: 2}
 --- !u!114 &8201474755551135628
 MonoBehaviour:
   m_ObjectHideFlags: 0

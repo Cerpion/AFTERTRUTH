@@ -17,6 +17,17 @@ public class Photo : MonoBehaviour
         _originalPosition = transform.position;
     }
 
+    public void ResetPhoto()
+    {
+        transform.position = _originalPosition;
+        LiquidType = _initialLiquidType;
+        CurrentSlot = null;
+
+
+        transform.LeanScale(Vector3.one, 0.25f);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+    }
+
     public void Select()
     {
         transform.LeanScale(Vector3.one * 1.1f, 0.25f);
