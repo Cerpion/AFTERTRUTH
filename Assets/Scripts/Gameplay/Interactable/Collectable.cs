@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Collectable : Interactable
@@ -7,20 +8,18 @@ public class Collectable : Interactable
 
     public override void StartInteraction()
     {
-        //Open Investigation
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
-        ServiceLocator.Instance.GetService<InspectionSystem>().StartInspect(_itemID.ID);
+
+        var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
+        inspection.StartInspect(_itemID.ID);
+        inspection.OnInspectionFinished += ExitInteraction;
     }
 
     public override void ExitInteraction()
     {
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
         gameObject.SetActive(false);
-        Debug.LogWarning("Add item To Inventory");
-        //Close Investigation
-        //Add Item
-        //se puede mover
-
+        ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
     }
 
 

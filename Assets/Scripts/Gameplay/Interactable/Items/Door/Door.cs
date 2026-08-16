@@ -8,12 +8,15 @@ public enum DoorOpen
 
 public class Door : MonoBehaviour
 {
+    [Header("Configuration")]
     [SerializeField] private ItemID _itemRequired;
+    [SerializeField] private string _information;
+
     [SerializeField] private InteractableObject _interactable;
     [SerializeField] private Transform _doorPivot;
     [SerializeField] private DoorOpen _openDirection;
-    [SerializeField] private string _information;
 
+    [Header ("audio")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _locked;
     [SerializeField] private AudioClip _open;
