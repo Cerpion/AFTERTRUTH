@@ -40,6 +40,11 @@ public class InteractiveItemFactory : MonoBehaviour
 
     public ItemInspect GetStatsByID(string id)
     {
+        if (!_stats.ContainsKey(id))
+        {
+            return null;
+        }
+
         return _stats[id];
     }
 }

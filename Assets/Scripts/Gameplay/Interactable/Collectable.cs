@@ -5,6 +5,7 @@ public class Collectable : Interactable
 {
     [SerializeField] private ItemID _itemID;
     [SerializeField] private Player _player;
+    [SerializeField] private string _dialog;
 
     public override void StartInteraction()
     {
@@ -13,6 +14,9 @@ public class Collectable : Interactable
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.StartInspect(_itemID.ID);
         inspection.OnInspectionFinished += ExitInteraction;
+
+        if(_dialog != string.Empty)
+        DialogueManager.Instance.Play(_dialog);
     }
 
     public override void ExitInteraction()

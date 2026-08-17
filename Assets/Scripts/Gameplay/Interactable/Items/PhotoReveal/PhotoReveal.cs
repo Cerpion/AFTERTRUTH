@@ -10,7 +10,8 @@ public class PhotoReveal : Interactable
     [SerializeField] private ItemID _itemToInspect;
     [SerializeField] private GameObject _photo;
     [SerializeField] private float _duration = 2;
-    [SerializeField] private string _tip;
+    [SerializeField] private string _dialogLock;
+    [SerializeField] private string _dialogReveal;
     [SerializeField] private InteractableObject _interactable;
 
     private void Start()
@@ -56,8 +57,9 @@ public class PhotoReveal : Interactable
 
             _photo.GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.black, Color.white, t);
             yield return null;
-        }   
+        }
 
+        DialogueManager.Instance.Play(_dialogReveal);
         yield return new WaitForSeconds(duration);
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
@@ -70,7 +72,7 @@ public class PhotoReveal : Interactable
         var player = ServiceLocator.Instance.GetService<Player>();
         if (!player.Inventory.ContainItem(_requiredItem))
         {
-            Debug.Log(_tip);
+            DialogueManager.Instance.Play(_dialogLock);
             return false;
         }
 

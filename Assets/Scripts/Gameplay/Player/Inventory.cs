@@ -24,9 +24,8 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        var stats = ServiceLocator.Instance.GetService<InspectionSystem>().InteractiveItemFactory.GetStatsByID(item.ID);
-        _inventoryView.AddItem(_inventory.Count, stats.Icon);
         _inventory.Add(item);
+        UpdateInventory();
     }
 
     public void TryRemove(ItemID item)
@@ -36,10 +35,19 @@ public class Inventory : MonoBehaviour
         //    return;
         //}
 
-        var indexItem = _inventory.IndexOf(item);
-        _inventoryView.Remove(indexItem);
-
         _inventory.Remove(item);
+        UpdateInventory();
+    }
+
+    public void UpdateInventory()
+    {
+        _inventoryView.Reset();
+
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            var stats = ServiceLocator.Instance.GetService<InspectionSystem>().InteractiveItemFactory.GetStatsByID(_inventory[i].ID);
+            _inventoryView.UpdateView(i, stats.Icon);
+        }
     }
 
     public bool ContainItem(ItemID item)

@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: InteractiveConfiguration
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveItemsConfiguration
   NormalItems:
+  - ItemID: {fileID: 11400000, guid: 05d8e6b39ebd87f46b770fa8d3f1cfe4, type: 2}
+    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
   - ItemID: {fileID: 11400000, guid: 6855855ef8eb2a645badbdcf64ee2448, type: 2}
+    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
+  - ItemID: {fileID: 11400000, guid: 5c69eac80a02e7c4db9edbc825eefd41, type: 2}
+    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
+  - ItemID: {fileID: 11400000, guid: 28711923ecbcaf44b98d36f9e92601a7, type: 2}
+    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
+  - ItemID: {fileID: 11400000, guid: 85d3c5d3af8d2bf41821d405e690af27, type: 2}
     Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
     Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
   InteractiveItems:

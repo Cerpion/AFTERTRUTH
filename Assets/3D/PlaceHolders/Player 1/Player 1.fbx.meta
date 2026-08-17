@@ -39,7 +39,291 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: metarig|Idle
+      internalID: -5324238279805231817
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Phone
+      takeName: metarig|Phone
+      internalID: -3236521273664548477
+      firstFrame: 0
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Phone Idle
+      takeName: metarig|Phone Idle
+      internalID: -4886810015933630817
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Phone Light
+      takeName: metarig|Phone Light
+      internalID: 6721591288856743442
+      firstFrame: 1
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Cylinder.070
+        weight: 0
+      - path: Cylinder.071
+        weight: 0
+      - path: Cylinder.072
+        weight: 0
+      - path: Cylinder.073
+        weight: 0
+      - path: Cylinder.074
+        weight: 0
+      - path: Cylinder.075
+        weight: 0
+      - path: Cylinder.076
+        weight: 0
+      - path: Cylinder.077
+        weight: 0
+      - path: Cylinder.078
+        weight: 0
+      - path: Cylinder.079
+        weight: 0
+      - path: Cylinder.080
+        weight: 0
+      - path: Cylinder.081
+        weight: 0
+      - path: Cylinder.082
+        weight: 0
+      - path: Cylinder.083
+        weight: 0
+      - path: Cylinder.084
+        weight: 0
+      - path: metarig
+        weight: 0
+      - path: metarig/spine
+        weight: 0
+      - path: metarig/spine/pelvis.L
+        weight: 0
+      - path: metarig/spine/pelvis.L/pelvis.L_end
+        weight: 0
+      - path: metarig/spine/pelvis.R
+        weight: 0
+      - path: metarig/spine/pelvis.R/pelvis.R_end
+        weight: 0
+      - path: metarig/spine/spine.001
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L/fingers.L
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L/fingers.L/fingers.L_end
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R/fingers.R
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R/fingers.R/fingers.R_end
+        weight: 1
+      - path: metarig/spine/spine.001/spine.002/spine.003/spine.004
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.005
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.005/spine.006
+        weight: 0
+      - path: metarig/spine/spine.001/spine.002/spine.003/spine.004/spine.005/spine.006/spine.006_end
+        weight: 0
+      - path: metarig/spine/thigh.L
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L/foot.L
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L/foot.L/heel.02.L
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L/foot.L/heel.02.L/heel.02.L_end
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L/foot.L/toe.L
+        weight: 0
+      - path: metarig/spine/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+        weight: 0
+      - path: metarig/spine/thigh.R
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R/foot.R
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R/foot.R/heel.02.R
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R/foot.R/heel.02.R/heel.02.R_end
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R/foot.R/toe.R
+        weight: 0
+      - path: metarig/spine/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: metarig|Run
+      internalID: -2483591982332496685
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: metarig|Walk
+      internalID: 2933577835342229695
+      firstFrame: 1
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -110,7 +394,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum DoorOpen
@@ -20,6 +21,7 @@ public class Door : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _locked;
     [SerializeField] private AudioClip _open;
+    public Action OnDoorLock;
 
 
     private void Start()
@@ -40,10 +42,12 @@ public class Door : MonoBehaviour
 
     private void DoorLock()
     {
-        //ShowDialog
-        Debug.LogWarning(_information);
+        if(_information != string.Empty)
+        DialogueManager.Instance.Play(_information);
 
         _audioSource.clip = _locked;
         _audioSource.Play();
+
+        OnDoorLock?.Invoke();
     }
 }

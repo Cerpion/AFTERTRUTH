@@ -4,13 +4,16 @@ using UnityEngine.UI;
 public class InventoryView : MonoBehaviour
 {
     [SerializeField] private Image[] _itemImage;
-    public void AddItem(int index, Sprite sprite)
+    public void UpdateView (int index, Sprite sprite)
     {
         _itemImage[index].sprite = sprite;
     }
 
-    public void Remove(int index)
+    public void Reset()
     {
-        _itemImage[index].sprite = null;
+        foreach (var item in _itemImage)
+        {
+            item.sprite = null;
+        } 
     }
 }

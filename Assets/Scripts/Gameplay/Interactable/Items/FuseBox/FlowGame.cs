@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,6 +35,7 @@ public class FlowGame : MonoBehaviour
     private FlowColor _currentColor;
 
     private bool _isDrawing;
+    public Action Finish;
 
     private void Awake()
     {
@@ -230,6 +232,7 @@ public class FlowGame : MonoBehaviour
             return;
 
         Debug.Log("¡GANASTE!");
+        Finish?.Invoke();
     }
 
     private FlowCell GetCellUnderMouse()

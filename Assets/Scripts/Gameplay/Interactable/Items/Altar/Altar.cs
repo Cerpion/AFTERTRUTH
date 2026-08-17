@@ -4,7 +4,7 @@ using UnityEngine;
 public class Altar : Interactable
 {
     [SerializeField] private CinemachineCamera _camera;
-    [SerializeField] private string _tip;
+    [SerializeField] private string _dialogue;
 
     public override void StartInteraction()
     {
@@ -14,7 +14,7 @@ public class Altar : Interactable
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract += ExitInteraction;
 
-        Debug.LogWarning(_tip);
+        DialogueManager.Instance.Play(_dialogue);
 
     }
     public override void ExitInteraction()

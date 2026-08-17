@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7b51bfa212984c848ff78813236c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InspectionCollectable
-  _itemID: {fileID: 11400000, guid: 6855855ef8eb2a645badbdcf64ee2448, type: 2}
+  _itemID: {fileID: 11400000, guid: 05d8e6b39ebd87f46b770fa8d3f1cfe4, type: 2}
 --- !u!65 &3892026439336818837
 BoxCollider:
   m_ObjectHideFlags: 0

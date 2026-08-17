@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private InteractionCheck _interactionCheck;
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private GameObject _light;
 
 
     [SerializeField] private float _currentSpeed;
@@ -59,10 +61,12 @@ public class Player : MonoBehaviour
     public void Running()
     {
         _currentSpeed = _runSpeed;
+        _playerAnimator.Play("Run");
     }
     public void Walk()
     {
         _currentSpeed = _normalSpeed;
+        _playerAnimator.Play("Walk");
     }
 
     void Update()
@@ -85,7 +89,12 @@ public class Player : MonoBehaviour
         Vector3 targetMovement = cameraForward * move.y + cameraRight * move.x;
         targetMovement *= _currentSpeed;
 
-        _movement = Vector3.Lerp( _movement, targetMovement, _acceleration * Time.deltaTime);
+        _movement = Vector3.Lerp(_movement, targetMovement, _acceleration * Time.deltaTime);
+
+
+        float speed = move.sqrMagnitude * _currentSpeed;
+        _playerAnimator.SetFloat("Speed", speed);
+
 
         //_movement = _camera.forward * move.y + _camera.right * move.x;
         //_movement *= _speed;
@@ -98,18 +107,33 @@ public class Player : MonoBehaviour
         _yVelocity += _gravity * Time.deltaTime;
         _movement.y = _yVelocity;
 
-        _characterController.Move(_movement  * Time.deltaTime);
+        _characterController.Move(_movement * Time.deltaTime);
 
         var look = _inputHandler.GetMouseMoveInput();
 
         transform.Rotate(Vector3.up, look.x * _sensitivity * Time.deltaTime);
 
         _pitch -= look.y * _sensitivity * Time.deltaTime;
-        _pitch = Mathf.Clamp(_pitch, -90f, 90f);
+        _pitch = Mathf.Clamp(_pitch, -30f, 50f);
         _cameraTarget.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
 
         _interactionCheck.GetInteractableTarget();
     }
 
-   
+    public void OnLight()
+    {
+        _playerAnimator.SetFloat("Speed", 0);
+
+        LeanTween.value(gameObject, 0f, 1f, 1f)
+            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); })
+            .setOnComplete(() => { _light.SetActive(true); });
+    }
+
+    public void OffLight()
+    {
+        _light.SetActive(false);
+        LeanTween.value(gameObject, 1f, 0f, 1f)
+            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
+    }
+
 }

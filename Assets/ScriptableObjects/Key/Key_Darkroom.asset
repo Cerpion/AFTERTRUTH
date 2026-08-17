@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7eef608b4855dc4b923a0aac363e80c, type: 3}
-  m_Name: Key
+  m_Name: Key_Darkroom
   m_EditorClassIdentifier: Assembly-CSharp::ItemID
-  ID: TestKey
+  ID: 'Key_Darkroom '

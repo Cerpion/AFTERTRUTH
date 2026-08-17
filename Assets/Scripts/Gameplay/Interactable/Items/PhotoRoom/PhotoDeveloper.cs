@@ -21,8 +21,11 @@ public enum Liquids
 public class PhotoDeveloper : Interactable
 {
     [Header("Unlock minigame")]
-    [SerializeField] private InteractableObject _interactableObject;
-    [SerializeField] private ItemID _itemRequired;
+    [SerializeField] private ItemID _photoRequired;
+    [SerializeField] private string _photoDialogue;
+    [SerializeField] private ItemID _liquidsRequired;
+    [SerializeField] private string _liquidDialogue;
+    private bool _unlock;
 
     [Header("FillLiquids")]
     [SerializeField] private LiquidPhoto[] _liquids;
@@ -50,11 +53,6 @@ public class PhotoDeveloper : Interactable
 
         _stateMachine.Initialize(PhotoDeveloperState.FillingLiquids);
 
-        _interactableObject.SetItemsRequired(_itemRequired);
-        _interactableObject.OnLocked += Locked;
-        _interactableObject.OnInteracted += Interacted;
-
-        GetComponent<BoxCollider>().enabled = false;
         _photo.gameObject.SetActive(false);
         foreach (var item in _liquids)
         {
@@ -70,22 +68,56 @@ public class PhotoDeveloper : Interactable
         _stateMachine.Update(Time.deltaTime);
     }
 
-    private void Locked()
+    public bool LockPhotoDeveloper()
     {
-        Debug.LogWarning("Necesito llenar los slots con algo");
-    }
+        if (_unlock)
+        {
+            return true;
+        }
 
-    private void Interacted()
-    {
-        GetComponent<BoxCollider>().enabled = true;
+        var player = ServiceLocator.Instance.GetService<Player>();
+
+
+        if (!player.Inventory.ContainItem(_photoRequired))
+        {
+            DialogueManager.Instance.Play(_photoDialogue);
+
+            return false;
+        }
+
+        if (!player.Inventory.ContainItem(_liquidsRequired))
+        {
+            DialogueManager.Instance.Play(_liquidDialogue);
+
+            return false;
+        }
+
+        player.Inventory.TryRemove(_photoRequired);
+        player.Inventory.TryRemove(_liquidsRequired);
+
+        _photo.gameObject.SetActive(true);
         foreach (var item in _liquids)
         {
             item.gameObject.SetActive(true);
         }
+
+        _unlock = true;
+
+        return true;
     }
+
+
+
 
     public override void StartInteraction()
     {
+
+        if (!LockPhotoDeveloper())
+        {
+            return;
+        }
+
+
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
  

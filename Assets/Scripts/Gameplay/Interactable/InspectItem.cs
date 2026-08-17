@@ -3,6 +3,7 @@ using UnityEngine;
 public class InspectItem : Interactable
 {
     [SerializeField] private ItemID _itemID;
+    [SerializeField] private string _dialogue;
 
     public override void StartInteraction()
     {
@@ -10,6 +11,11 @@ public class InspectItem : Interactable
         inspection.StartInspect(_itemID.ID);
         inspection.OnInspectionFinished += ExitInteraction;
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
+
+        if (_dialogue != string.Empty)
+        {
+        DialogueManager.Instance.Play(_dialogue);
+        }
     }
 
     public override void ExitInteraction()
