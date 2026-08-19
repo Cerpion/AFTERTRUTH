@@ -9,6 +9,7 @@ public class InspectionSystem : MonoBehaviour
     public InteractiveItemFactory InteractiveItemFactory { get => _interactiveItemFactory; }
 
     [SerializeField] private Camera _camera;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
     [SerializeField] private Transform _objectToInspect;
     [SerializeField] private float _rotationSpeed = 100f;
@@ -30,6 +31,14 @@ public class InspectionSystem : MonoBehaviour
 
     public void StartInspect(string itemID)
     {
+        _canvasGroup.alpha = 0;
+        _canvasGroup.LeanAlpha(1, 0.25f);
+
+        _objectToInspect.transform.localPosition = new Vector3(0, -0.5f, 0.5f);
+        _objectToInspect.transform.LeanMoveLocalY(0,0.25f).setEaseOutQuad().delay = 0.15f;
+
+      
+
         _currentInspectionCollectable = null;
         _objectToInspect.rotation = Quaternion.identity;
 
