@@ -7,13 +7,14 @@ public class InteractableObject : Interactable
 
     public Action OnInteracted;
     public Action OnLocked;
+    public override bool ShowCursor => true;
 
     public void SetItemsRequired(ItemID item)
     {
         _requiredItem = item;
     }
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         var player = ServiceLocator.Instance.GetService<Player>();
 
@@ -36,4 +37,5 @@ public class InteractableObject : Interactable
         RemoveInteractable();
     }
 
+    public override void OnInteractionEnded(){}
 }

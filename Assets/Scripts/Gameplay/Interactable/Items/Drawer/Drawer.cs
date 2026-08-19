@@ -5,24 +5,30 @@ public class Drawer : Interactable
     private bool _open;
     [SerializeField] private Transform _drawer;
     [SerializeField] private Collectable[] _collectable;
+    public override bool ShowCursor => false;
+
 
     private void Start()
     {
         ActivateItems(false);
     }
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         _open = !_open;
 
         if (_open)
         {
             Open();
+            StopInteraction();
             return;
         }
 
         Close();
+        StopInteraction();
     }
+
+    public override void OnInteractionEnded(){}
 
     private void Open()
     {
@@ -44,4 +50,6 @@ public class Drawer : Interactable
             item.GetComponent<BoxCollider>().enabled = activate;
         }
     }
+
+  
 }

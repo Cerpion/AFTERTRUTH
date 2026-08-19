@@ -7,8 +7,9 @@ public class InspectPuzzle : Interactable
     [SerializeField] private ItemID _itemID;
     [SerializeField] private ItemID _requiredItem;
     [SerializeField] private string _information;
+    public override bool ShowCursor => false;
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         if (_requiredItem  != null)
         {
@@ -18,23 +19,21 @@ public class InspectPuzzle : Interactable
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.StartInspect(_itemID.ID);
-        inspection.OnInspectionFinished += ExitInteraction;
+        inspection.OnInspectionFinished += StopInteraction;
         inspection.OnItemObtained += ItemObtained;
-
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
     }
 
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished -= ExitInteraction;
+        inspection.OnInspectionFinished -= StopInteraction;
         inspection.OnItemObtained -= ItemObtained;
-
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
     }
 
     private void ItemObtained()
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
+
+
 }

@@ -21,7 +21,6 @@ public class MusicBox : Interactable
     [SerializeField] private MusicBoxDirections[] _sequence;
 
     [Header("Configuration")]
-    [SerializeField] private CinemachineCamera _camera;
     [SerializeField] private MusicBoxAudioHandler _musicBoxAudioHandler;
     [SerializeField] private Animator _animator;
 
@@ -32,9 +31,11 @@ public class MusicBox : Interactable
     private StateMachine<MusicBoxState> _stateMachine;
     private Action OnExitInteraction;
 
+    public override bool ShowCursor => true;
+
     private void Start()
     {
-        OnExitInteraction = ExitInteraction;
+        OnExitInteraction = StopInteraction;
 
         _stateMachine = new StateMachine<MusicBoxState>();
 
@@ -45,16 +46,13 @@ public class MusicBox : Interactable
         _stateMachine.Initialize(MusicBoxState.Closed);
     }
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
-        _camera.Priority = 100;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
         _stateMachine.EnterCurrentState();
     }
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
         _stateMachine.ExitCurrentState();
-        _camera.Priority = 0;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
     }
+
 }

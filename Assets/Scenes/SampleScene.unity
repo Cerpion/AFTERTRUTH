@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63efecb91a9db4b4fad00fe45ff034ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InspectItem
+  _camera: {fileID: 0}
   _interactionView: {fileID: 342713977}
   _itemID: {fileID: 11400000, guid: bea241085f7478442837b1d2a7b48392, type: 2}
   _dialogue: Hola
@@ -1686,6 +1687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 409839138}
 --- !u!65 &135438346
 BoxCollider:
@@ -2994,9 +2996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c631b40af4481db418eb39fdb39f4cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  _camera: {fileID: 0}
   _interactionView: {fileID: 1976982659}
   _itemID: {fileID: 11400000, guid: 5c69eac80a02e7c4db9edbc825eefd41, type: 2}
-  _player: {fileID: 0}
   _dialog: 
 --- !u!65 &181765715
 BoxCollider:
@@ -3336,6 +3338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 959388587}
 --- !u!65 &215396551
 BoxCollider:
@@ -3563,6 +3566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 228822165}
 --- !u!65 &243548280
 BoxCollider:
@@ -4727,6 +4731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 1066931757}
 --- !u!65 &332035824
 BoxCollider:
@@ -4887,6 +4892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b37b4148775fe448e6b3140f0298d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InspectPuzzle
+  _camera: {fileID: 0}
   _interactionView: {fileID: 303900532}
   _itemID: {fileID: 11400000, guid: 70148b67fe1ec1746a091051fd1e3db3, type: 2}
   _requiredItem: {fileID: 0}
@@ -6370,6 +6376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 483562623}
 --- !u!65 &461835295
 BoxCollider:
@@ -9253,6 +9260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 390198042}
 --- !u!1 &696591444
 GameObject:
@@ -10315,6 +10323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ba1c4b1a32b144abdbce00f0bbec6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Drawer
+  _camera: {fileID: 0}
   _interactionView: {fileID: 1283280603}
   _drawer: {fileID: 584562079}
   _collectable:
@@ -13666,9 +13675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e98274bb7ec27442bd3172ca13f1248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FuseBox
+  _camera: {fileID: 151017160}
   _interactionView: {fileID: 1836583829}
   _globalLightHandler: {fileID: 2043268201}
-  _camera: {fileID: 151017160}
   _flowGame: {fileID: 1072782592}
   _normalDoor: {fileID: 34900562}
   _lockedDoor: {fileID: 1141374275}
@@ -18122,9 +18131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c631b40af4481db418eb39fdb39f4cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  _camera: {fileID: 0}
   _interactionView: {fileID: 2019079613}
   _itemID: {fileID: 11400000, guid: 85d3c5d3af8d2bf41821d405e690af27, type: 2}
-  _player: {fileID: 0}
   _dialog: 
 --- !u!65 &1471519239
 BoxCollider:
@@ -19774,6 +19783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba0df94d66d16a41a0f6bc411bd73ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CajaFuerte
+  _camera: {fileID: 0}
   _interactionView: {fileID: 172821552}
   _correctCode: 1234
   _canvas: {fileID: 306628222}
@@ -20959,6 +20969,133 @@ Transform:
   - {fileID: 562432710}
   m_Father: {fileID: 1743754060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1741378634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1741378637}
+  - component: {fileID: 1741378636}
+  - component: {fileID: 1741378635}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1741378635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
+--- !u!108 &1741378636
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741378634}
+  m_Enabled: 1
+  serializedVersion: 12
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize2D: {x: 0.5, y: 0.5}
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
+--- !u!4 &1741378637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741378634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.8365951, y: -0.31474793, z: -0.088811085, w: 0.439494}
+  m_LocalPosition: {x: -1.73118, y: -0.1, z: 2.39952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 42.801, y: -144.578, z: -124.498}
 --- !u!1 &1743754059
 GameObject:
   m_ObjectHideFlags: 0
@@ -21569,9 +21706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c631b40af4481db418eb39fdb39f4cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  _camera: {fileID: 0}
   _interactionView: {fileID: 465758032}
   _itemID: {fileID: 11400000, guid: 28711923ecbcaf44b98d36f9e92601a7, type: 2}
-  _player: {fileID: 0}
   _dialog: Hola
 --- !u!65 &1811246810
 BoxCollider:
@@ -22163,6 +22300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 337142766}
 --- !u!65 &1866130074
 BoxCollider:
@@ -24279,6 +24417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf88204a5e6b124485a1b3322554092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  _camera: {fileID: 0}
   _interactionView: {fileID: 1485521677}
 --- !u!65 &2099911614
 BoxCollider:
@@ -25649,3 +25788,4 @@ SceneRoots:
   - {fileID: 2058115794}
   - {fileID: 109958746}
   - {fileID: 1611738406}
+  - {fileID: 1741378637}

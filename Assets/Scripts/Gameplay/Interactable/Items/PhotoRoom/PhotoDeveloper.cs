@@ -36,14 +36,14 @@ public class PhotoDeveloper : Interactable
     [SerializeField] private ItemID _itemReward;
     [SerializeField] private Photo _photo;
 
-    [SerializeField] private CinemachineCamera _camera;
     private StateMachine<PhotoDeveloperState> _stateMachine;
     private Action OnExitInteraction;
     private bool _activateUpdate;
+    public override bool ShowCursor => true;
 
     private void Start()
     {
-        OnExitInteraction = ExitInteraction;
+        OnExitInteraction = StopInteraction;
 
         _stateMachine = new StateMachine<PhotoDeveloperState>();
 
@@ -109,35 +109,30 @@ public class PhotoDeveloper : Interactable
 
 
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
 
         if (!LockPhotoDeveloper())
         {
+            StopInteraction();
             return;
         }
 
-
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
- 
-        _camera.Priority = 100;
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
         _stateMachine.EnterCurrentState();
 
         _activateUpdate = true;
     }
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         _stateMachine.ExitCurrentState();
-        _camera.Priority = 0;
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
 
         _activateUpdate = false;
     }
+
+
 }
 
 public class DevelopingState : State<PhotoDeveloperState>

@@ -4,47 +4,28 @@ using UnityEngine;
 public class FuseBox : Interactable
 {
     [SerializeField] private GlobalLightHandler _globalLightHandler;
-    [SerializeField] private CinemachineCamera _camera;
     [SerializeField] private FlowGame _flowGame;
 
     [SerializeField] private GameObject _normalDoor;
     [SerializeField] private GameObject _lockedDoor;
     private bool _canUpdate;
+    public override bool ShowCursor => true;
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         _canUpdate = true;
-
-        _camera.Priority = 100;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-
-        var input = ServiceLocator.Instance.GetService<InputHandler>();
-        input.OnInteract += ExitInteraction;
         _flowGame.Finish += OnLight;
     }
 
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
         _canUpdate = false;
-         
-        _camera.Priority = 0;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
-
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        var input = ServiceLocator.Instance.GetService<InputHandler>();
-        input.OnInteract -= ExitInteraction;
         _flowGame.Finish -= OnLight;
-
     }
 
     public void OnLight()
     {
-        ExitInteraction();
+        StopInteraction();
         _globalLightHandler.SetDay();
         var player = ServiceLocator.Instance.GetService<Player>();
         player.OffLight();
@@ -64,4 +45,5 @@ public class FuseBox : Interactable
 
         _flowGame.UpdateFlowGame();
     }
+
 }

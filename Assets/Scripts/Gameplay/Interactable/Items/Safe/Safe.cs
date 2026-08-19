@@ -20,6 +20,7 @@ public class Safe : Interactable
     [SerializeField] private GameObject _winState;
 
     private string _currentInput = "";
+    public override bool ShowCursor { get => true; }
 
 
     private void Start()
@@ -45,7 +46,7 @@ public class Safe : Interactable
         }
     }
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         _canvas.SetActive(true);
 
@@ -57,28 +58,16 @@ public class Safe : Interactable
 
         if (_winState != null)
             _winState.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        ServiceLocator.Instance
-            .GetService<GameState>()
-            .ChangeState(GameStates.Puzzle);
     }
 
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
         _canvas.SetActive(false);
 
         _currentInput = "";
         UpdateInputText();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        ServiceLocator.Instance
-            .GetService<GameState>()
-            .ChangeState(GameStates.Gameplay);
+       
     }
 
     private void AddDigit(int digit)
@@ -124,7 +113,7 @@ public class Safe : Interactable
 
         Debug.Log("Fallaste");
         DialogueManager.Instance.Play("Hola");
-        ExitInteraction();
+        StopInteraction();
     }
 
     private void Win()
@@ -134,6 +123,7 @@ public class Safe : Interactable
 
         Debug.Log("Ganaste");
         DialogueManager.Instance.Play("Hola");
-        ExitInteraction();
+        StopInteraction();
     }
+
 }

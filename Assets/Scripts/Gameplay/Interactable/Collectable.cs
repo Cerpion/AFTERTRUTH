@@ -4,30 +4,25 @@ using UnityEngine;
 public class Collectable : Interactable
 {
     [SerializeField] private ItemID _itemID;
-    [SerializeField] private Player _player;
     [SerializeField] private string _dialog;
+    public override bool ShowCursor => true;
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
-
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.StartInspect(_itemID.ID);
-        inspection.OnInspectionFinished += ExitInteraction;
+        inspection.OnInspectionFinished += StopInteraction;
 
         if(_dialog != string.Empty)
         DialogueManager.Instance.Play(_dialog);
     }
 
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
         gameObject.SetActive(false);
         ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished -= ExitInteraction;
+        inspection.OnInspectionFinished -= StopInteraction;
     }
-
-
 }

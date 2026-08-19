@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PhotoReveal : Interactable
 {
-    [SerializeField] private CinemachineCamera _camera;
     [SerializeField] private ItemID _requiredItem;
     [SerializeField] private ItemID _itemToInspect;
     [SerializeField] private GameObject _photo;
@@ -13,6 +12,7 @@ public class PhotoReveal : Interactable
     [SerializeField] private string _dialogLock;
     [SerializeField] private string _dialogReveal;
     [SerializeField] private InteractableObject _interactable;
+    public override bool ShowCursor => false;
 
     private void Start()
     {
@@ -20,27 +20,23 @@ public class PhotoReveal : Interactable
         _photo.SetActive(false);
     }
 
-    public override void StartInteraction()
+    public override void OnInteractionStarted()
     {
         if (!ContainItem())
         {
             return;
         }
 
-        _camera.Priority = 100;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
         _photo.SetActive(true);
 
         StartCoroutine(ChangeColor());
     }
-    public override void ExitInteraction()
+    public override void OnInteractionEnded()
     {
-        _camera.Priority = 0;
-        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
         _interactable.SetItemsRequired(null);
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished -= ExitInteraction;
+        inspection.OnInspectionFinished -= StopInteraction;
     }
 
     private IEnumerator ChangeColor()
@@ -64,7 +60,7 @@ public class PhotoReveal : Interactable
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.StartInspect(_itemToInspect.ID);
-        inspection.OnInspectionFinished += ExitInteraction;
+        inspection.OnInspectionFinished += StopInteraction;
     }
 
     public bool ContainItem()
