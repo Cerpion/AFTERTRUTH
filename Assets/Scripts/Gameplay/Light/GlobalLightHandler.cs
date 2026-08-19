@@ -8,23 +8,23 @@ public class GlobalLightHandler : MonoBehaviour
     [SerializeField] private BakeData _day;
     [SerializeField] private BakeData _night;
 
-    private void OnEnable()
-    {
-        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-    }
+    //private void OnEnable()
+    //{
+    //    EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+    //}
 
-    private void OnDisable()
-    {
-        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-    }
+    //private void OnDisable()
+    //{
+    //    EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+    //}
 
-    private void OnPlayModeStateChanged(PlayModeStateChange state)
-    {
-        if (state == PlayModeStateChange.ExitingPlayMode)
-        {
-            SetDay();
-        }
-    }
+    //private void OnPlayModeStateChanged(PlayModeStateChange state)
+    //{
+    //    if (state == PlayModeStateChange.ExitingPlayMode)
+    //    {
+    //        SetDay();
+    //    }
+    //}
 
 
     public void SetDay()
