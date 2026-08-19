@@ -90,7 +90,7 @@ public class MusicBoxClosed : State<MusicBoxState>
         _musicBoxAudio.PlayRotate();
         float rotation = direction == MusicBoxDirections.Left ? 90f : -90f;
         var sequence = LeanTween.sequence();
-        sequence.append(_key.LeanRotateAround(Vector3.forward, rotation, 0.3f));
+        sequence.append(_key.LeanRotateAround(Vector3.right, rotation, 0.3f));
         sequence.append(() => { _lockInput = false; });
     }
 

@@ -24,6 +24,7 @@ public class PhotoReveal : Interactable
     {
         if (!ContainItem())
         {
+            StopInteraction();
             return;
         }
 

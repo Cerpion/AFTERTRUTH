@@ -30,17 +30,19 @@ public class MusicBox : Interactable
 
     private StateMachine<MusicBoxState> _stateMachine;
     private Action OnExitInteraction;
+    private Action OnDesactiveInteraction;
 
-    public override bool ShowCursor => true;
+    public override bool ShowCursor => false;
 
     private void Start()
     {
         OnExitInteraction = StopInteraction;
+        OnDesactiveInteraction = DesactiveExitInteraction;
 
         _stateMachine = new StateMachine<MusicBoxState>();
 
         _stateMachine.AddState(MusicBoxState.Closed, new MusicBoxClosed(_sequence, _musicBoxAudioHandler, OnExitInteraction, _key));
-        _stateMachine.AddState(MusicBoxState.Opening, new MusicBoxOpening(_keyCollectable, _musicBoxAudioHandler, _animator, _itemID));
+        _stateMachine.AddState(MusicBoxState.Opening, new MusicBoxOpening(_keyCollectable, _musicBoxAudioHandler, _animator, _itemID, OnDesactiveInteraction));
         _stateMachine.AddState(MusicBoxState.Open, new MusicBoxOpen(OnExitInteraction));
 
         _stateMachine.Initialize(MusicBoxState.Closed);
