@@ -38,18 +38,22 @@ public class PhotoDeveloper : Interactable
 
     private StateMachine<PhotoDeveloperState> _stateMachine;
     private Action OnExitInteraction;
+    private Action OnDesactiveInteraction;
+
     private bool _activateUpdate;
     public override bool ShowCursor => true;
 
     private void Start()
     {
         OnExitInteraction = StopInteraction;
+        OnDesactiveInteraction = DesactiveExitInteraction;
 
         _stateMachine = new StateMachine<PhotoDeveloperState>();
 
+        _stateMachine.AddState(PhotoDeveloperState.Empty, new EmptyState());
         _stateMachine.AddState(PhotoDeveloperState.FillingLiquids, new FillingLiquidsState(OnExitInteraction, _liquidLayer, _liquids));
         _stateMachine.AddState(PhotoDeveloperState.Developing, new DevelopingState(OnExitInteraction, _liquidLayer, _slots, _photo));
-        _stateMachine.AddState(PhotoDeveloperState.Completed, new CompletedState(OnExitInteraction, _itemReward, _photo));
+        _stateMachine.AddState(PhotoDeveloperState.Completed, new CompletedState(OnExitInteraction, _itemReward, _photo, OnDesactiveInteraction));
 
         _stateMachine.Initialize(PhotoDeveloperState.FillingLiquids);
 
@@ -135,7 +139,11 @@ public class PhotoDeveloper : Interactable
 
 }
 
-public class DevelopingState : State<PhotoDeveloperState>
+public class EmptyState : State<PhotoDeveloperState>
+{
+}
+
+    public class DevelopingState : State<PhotoDeveloperState>
 {
     private readonly Action OnExitInteraction;
     private readonly LayerMask _liquidLayer;
@@ -322,16 +330,20 @@ public class CompletedState : State<PhotoDeveloperState>
     private readonly Action OnExitInteraction;
     private readonly ItemID _item;
     private readonly Photo _photo;
+    private readonly Action _onDesactiveInteraction;
 
-    public CompletedState(Action onExitInteraction, ItemID item, Photo photo)
+    public CompletedState(Action onExitInteraction, ItemID item, Photo photo, Action onDesactiveInteraction)
     {
         OnExitInteraction = onExitInteraction;
         _item = item;
         _photo = photo;
+        _onDesactiveInteraction = onDesactiveInteraction;
     }
 
     public override void OnEnter()
     {
+        _onDesactiveInteraction?.Invoke();
+
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished += FinishInspection;
         inspection.StartInspect(_item.ID);
@@ -347,6 +359,7 @@ public class CompletedState : State<PhotoDeveloperState>
     public void FinishInspection()
     {
         ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_item);
+        ChangeState(PhotoDeveloperState.Empty);
         ExitInteraction();
     }
 

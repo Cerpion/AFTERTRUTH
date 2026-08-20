@@ -72,7 +72,7 @@ public class PauseManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
-
-        SceneManager.LoadScene(mainMenuSceneName);
+        ServiceLocator.Instance.GetService<TransitionManager>().ReturnToMainMenu();
+        //SceneManager.LoadScene(mainMenuSceneName);
     }
 }

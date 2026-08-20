@@ -15,9 +15,6 @@ public class InputHandler : MonoBehaviour
 
     void Awake()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         _inputs = new PlayerInputAction();
 
         _inputs.Player.Interact.performed += Interact;

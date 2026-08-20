@@ -14,6 +14,11 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SpawnPlayer();
+
         _stateMachine = new StateMachine<GameStates>();
         _stateMachine.AddState(GameStates.Gameplay, new GamePlayState());
         _stateMachine.AddState(GameStates.Puzzle, new InteractionState(_player));
@@ -24,6 +29,17 @@ public class GameState : MonoBehaviour
     public void ChangeState(GameStates newState)
     {
         _stateMachine.ChangeState(newState);
+    }
+
+    private void SpawnPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject spawn = GameObject.FindGameObjectWithTag("Respawn");
+
+        CharacterController controller = player.GetComponent<CharacterController>();
+        controller.enabled = false;
+        player.transform.SetPositionAndRotation(spawn.transform.position, spawn.transform.rotation);
+        controller.enabled = true;
     }
 
 }

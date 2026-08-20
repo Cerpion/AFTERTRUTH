@@ -35,7 +35,8 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(gameSceneName);
+        //SceneManager.LoadScene(gameSceneName);
+        ServiceLocator.Instance.GetService<TransitionManager>().StartGame();
     }
 
     public void QuitGame()
