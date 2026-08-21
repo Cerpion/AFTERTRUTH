@@ -10,6 +10,8 @@ public abstract class Interactable : MonoBehaviour
     public Action<Interactable> OnRemoveInteractable;
 
     public abstract bool ShowCursor { get;}
+    public Action OnEnterBlendFinished;
+    public bool PauseInteraction { get; set; }
     //public abstract bool OneShot { get; set; }
 
     public void StartInteraction()
@@ -23,6 +25,8 @@ public abstract class Interactable : MonoBehaviour
         if (_camera != null)
         {
             _camera.Priority = 100;
+            var brain = CinemachineCore.FindPotentialTargetBrain(_camera);
+            LeanTween.delayedCall(brain.DefaultBlend.Time, () => OnEnterBlendFinished?.Invoke());
         }
 
         ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Puzzle);
@@ -33,6 +37,11 @@ public abstract class Interactable : MonoBehaviour
 
     public void StopInteraction() 
     {
+        if (PauseInteraction)
+        {
+            return;
+        }
+
         if (ShowCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -42,6 +51,9 @@ public abstract class Interactable : MonoBehaviour
         if (_camera != null)
         {
             _camera.Priority = 0;
+
+            //var brain = CinemachineCore.FindPotentialTargetBrain(_camera);
+            //LeanTween.delayedCall(brain.DefaultBlend.Time, () => OnExitBlendFinished?.Invoke());
         }
 
         //if (OneShot)
