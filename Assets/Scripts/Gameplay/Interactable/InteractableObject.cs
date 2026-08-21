@@ -22,12 +22,14 @@ public class InteractableObject : Interactable
         {
             OnInteracted?.Invoke();
             RemoveInteractable();
+            StopInteraction();
             return;
         }
 
         if (!player.Inventory.ContainItem(_requiredItem))
         {
             OnLocked?.Invoke();
+            StopInteraction();
             return;
         }
 
@@ -35,6 +37,7 @@ public class InteractableObject : Interactable
         OnInteracted?.Invoke();
 
         RemoveInteractable();
+        StopInteraction();
     }
 
     public override void OnInteractionEnded(){}

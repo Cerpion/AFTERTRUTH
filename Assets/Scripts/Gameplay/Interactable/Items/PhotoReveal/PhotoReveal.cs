@@ -11,7 +11,7 @@ public class PhotoReveal : Interactable
     [SerializeField] private float _duration = 2;
     [SerializeField] private string _dialogLock;
     [SerializeField] private string _dialogReveal;
-    [SerializeField] private InteractableObject _interactable;
+    [SerializeField] private InteractableObject _door;
     public override bool ShowCursor => false;
 
     private void Start()
@@ -24,6 +24,7 @@ public class PhotoReveal : Interactable
     {
         if (!ContainItem())
         {
+            StopInteraction();
             return;
         }
 
@@ -33,7 +34,6 @@ public class PhotoReveal : Interactable
     }
     public override void OnInteractionEnded()
     {
-        _interactable.SetItemsRequired(null);
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished -= StopInteraction;
@@ -41,6 +41,8 @@ public class PhotoReveal : Interactable
 
     private IEnumerator ChangeColor()
     {
+        DesactiveExitInteraction();
+
         yield return new WaitForSeconds(1.5f);
 
         float time = 0;
@@ -60,6 +62,9 @@ public class PhotoReveal : Interactable
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.StartInspect(_itemToInspect.ID);
+
+        _door.SetItemsRequired(null);
+
         inspection.OnInspectionFinished += StopInteraction;
     }
 

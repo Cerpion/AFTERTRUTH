@@ -46,6 +46,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         dialogueContainer.SetActive(false);
     }

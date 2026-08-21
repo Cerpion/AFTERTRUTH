@@ -56,6 +56,11 @@ public abstract class Interactable : MonoBehaviour
         OnInteractionEnded();
     }
 
+    public void DesactiveExitInteraction()
+    {
+        ServiceLocator.Instance.GetService<InputHandler>().OnInteract -= StopInteraction;
+    }
+
     public abstract void OnInteractionStarted();
     public abstract void OnInteractionEnded();
 

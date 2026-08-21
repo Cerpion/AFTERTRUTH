@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MusicBoxOpening : State<MusicBoxState>
@@ -6,18 +7,21 @@ public class MusicBoxOpening : State<MusicBoxState>
     private readonly MusicBoxAudioHandler _musicBoxAudio;
     private readonly Animator _animator;
     private readonly ItemID _itemID;
-    private Player _player;
+    private readonly Action OnDesactiveInteraction;
 
-    public MusicBoxOpening(GameObject keyItem, MusicBoxAudioHandler musicBoxAudio, Animator animator, ItemID itemID)
+    public MusicBoxOpening(GameObject keyItem, MusicBoxAudioHandler musicBoxAudio, Animator animator, ItemID itemID, Action onDesactiveInteraction)
     {
         _keyItem = keyItem;
         _musicBoxAudio = musicBoxAudio;
         _animator = animator;
         _itemID = itemID;
+        OnDesactiveInteraction = onDesactiveInteraction;
     }
 
     public override void OnEnter()
     {
+        OnDesactiveInteraction?.Invoke();
+
         _musicBoxAudio.PlayOpen();
         _keyItem.gameObject.SetActive(true);
 
@@ -38,7 +42,9 @@ public class MusicBoxOpening : State<MusicBoxState>
 
     public void FinishInspection()
     {
+        Debug.Log("Exit");
         ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
+        _keyItem.gameObject.SetActive(false);
         ChangeState?.Invoke(MusicBoxState.Open);
     }
 

@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
         _inputHandler.OnSprintStart -= Running;
         _inputHandler.OnSprintCanceled -= Walk;
         _interactionCheck.DeactivateInteraction();
+
+        _playerAnimator.SetFloat("Speed", 0);
     }
 
     public void Interact()
@@ -61,12 +63,10 @@ public class Player : MonoBehaviour
     public void Running()
     {
         _currentSpeed = _runSpeed;
-        _playerAnimator.Play("Run");
     }
     public void Walk()
     {
         _currentSpeed = _normalSpeed;
-        _playerAnimator.Play("Walk");
     }
 
     void Update()
@@ -93,8 +93,7 @@ public class Player : MonoBehaviour
 
 
         float speed = move.sqrMagnitude * _currentSpeed;
-        _playerAnimator.SetFloat("Speed", speed);
-
+        _playerAnimator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
 
         //_movement = _camera.forward * move.y + _camera.right * move.x;
         //_movement *= _speed;
