@@ -7,24 +7,18 @@ public class SettingsManager : MonoBehaviour
     [Header("Default Values")]
     [SerializeField] private float defaultMouseSensitivity = 1f;
     [SerializeField] private float defaultVolume = 1f;
+    [SerializeField] private string defaultLanguage = "English";
 
     private const string MouseSensitivityKey = "MouseSensitivity";
     private const string VolumeKey = "Volume";
+    private const string LanguageKey = "Language";
 
     public float MouseSensitivity { get; private set; }
     public float Volume { get; private set; }
+    public string Language { get; private set; }
 
-    private void Awake()
+    public void Init()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         LoadSettings();
         ApplySettings();
     }
@@ -47,6 +41,15 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void SetLanguage(string language)
+    {
+        Language = language;
+
+        PlayerPrefs.SetString(LanguageKey, language);
+        PlayerPrefs.Save();
+    }
+
+
     private void LoadSettings()
     {
         MouseSensitivity = PlayerPrefs.GetFloat(
@@ -58,6 +61,11 @@ public class SettingsManager : MonoBehaviour
             VolumeKey,
             defaultVolume
         );
+
+        Language = PlayerPrefs.GetString(
+           LanguageKey,
+           defaultLanguage
+       );
     }
 
     private void ApplySettings()
@@ -69,5 +77,6 @@ public class SettingsManager : MonoBehaviour
     {
         SetMouseSensitivity(defaultMouseSensitivity);
         SetVolume(defaultVolume);
+        SetLanguage(defaultLanguage);
     }
 }

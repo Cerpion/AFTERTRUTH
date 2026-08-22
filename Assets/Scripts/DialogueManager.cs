@@ -171,7 +171,9 @@ public class DialogueManager : MonoBehaviour
 
         dialogueText.text = "";
 
-        string line = currentDialogue.lines[currentLineIndex];
+        string lineKey = currentDialogue.lines[currentLineIndex];
+
+        string line = ServiceLocator.Instance.GetService<LanguageHandler>().Get(lineKey);
 
         foreach (char character in line)
         {

@@ -11,7 +11,6 @@ public class InteractionCheck : MonoBehaviour
 
     public Interactable Interactable { get => _currentInteractable; }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<Interactable>(out var interactableItem))
@@ -27,6 +26,7 @@ public class InteractionCheck : MonoBehaviour
 
         interactableItem.OnRemoveInteractable += RemoveItem;
         _interactableItem.Add(interactableItem);
+
         interactableItem._interactionView.ShowPoint();
     }
 
@@ -36,11 +36,10 @@ public class InteractionCheck : MonoBehaviour
         {
             return;
         }
-       
+
         interactableItem.OnRemoveInteractable -= RemoveItem;
         RemoveItem(interactableItem);
     }
-
 
     public void RemoveItem(Interactable item)
     {
@@ -57,7 +56,6 @@ public class InteractionCheck : MonoBehaviour
 
         item._interactionView.Hide();
         _interactableItem.Remove(item);
-
     }
 
     public void GetInteractableTarget()
@@ -65,11 +63,6 @@ public class InteractionCheck : MonoBehaviour
         var closest = GetClosestInteractable();
 
         if (closest == null)
-        {
-            return;
-        }
-
-        if (!IsLookingAt(closest))
         {
             ClearCurrentInteractable();
             return;
@@ -81,6 +74,7 @@ public class InteractionCheck : MonoBehaviour
         }
 
         _currentInteractable?._interactionView.ShowPoint();
+
         _currentInteractable = closest;
         _currentInteractable._interactionView.ShowInput();
     }
@@ -96,8 +90,6 @@ public class InteractionCheck : MonoBehaviour
         _currentInteractable = null;
     }
 
-
-
     private Interactable GetClosestInteractable()
     {
         if (_interactableItem.Count == 0)
@@ -106,47 +98,55 @@ public class InteractionCheck : MonoBehaviour
         }
 
         Interactable closest = null;
-        var closestDistanceSqr = float.MaxValue;
+        float closestDistanceSqr = float.MaxValue;
 
-        var playerPosition = transform.position;
+        Vector3 playerPosition = transform.position;
 
-        foreach (Interactable interactable in _interactableItem)
+        // Solo nos interesa la dirección horizontal del Player.
+        Vector3 playerForward = transform.forward;
+        playerForward.y = 0f;
+        playerForward.Normalize();
+
+        foreach (var interactable in _interactableItem)
         {
-            float distanceSqr = (interactable.transform.position - playerPosition).sqrMagnitude;
+            // Dirección desde el Player hacia el objeto.
+            Vector3 directionToObject = interactable.transform.position - playerPosition;
 
-            if (distanceSqr < closestDistanceSqr)
+            // Ignoramos completamente la diferencia de altura.
+            directionToObject.y = 0f;
+
+            float distanceSqr = directionToObject.sqrMagnitude;
+
+            // Si ya tenemos uno más cercano, no necesitamos comprobar este.
+            if (distanceSqr >= closestDistanceSqr)
             {
-                closestDistanceSqr = distanceSqr;
-                closest = interactable;
+                continue;
             }
+
+            directionToObject.Normalize();
+
+            float angle = Vector3.Angle(playerForward, directionToObject);
+
+            // El objeto no está suficientemente de frente.
+            if (angle > _interactionAngle)
+            {
+                continue;
+            }
+
+            closestDistanceSqr = distanceSqr;
+            closest = interactable;
         }
 
         return closest;
     }
 
-    private bool IsLookingAt(Interactable interactable)
-    {
-        var directionToObject = interactable.transform.position - transform.position;
-        directionToObject.y = 0f;
-
-        var forward = transform.forward;
-        forward.y = 0f;
-
-        float angle = Vector3.Angle(forward, directionToObject);
-
-        return angle <= _interactionAngle;
-    }
-
     public void DeactivateInteraction()
     {
-        //GetComponent<SphereCollider>().isTrigger = false;
         transform.LeanScale(Vector3.zero, 0.15f);
     }
 
     public void ActivateInteraction()
     {
-        //GetComponent<SphereCollider>().isTrigger = true;
         transform.LeanScale(Vector3.one * _initialSize, 0.15f);
-
     }
 }

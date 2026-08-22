@@ -1,0 +1,39 @@
+﻿ID,Spanish,English
+INTRO_FIND_KEY_01,Necesito encontrar la llave de repuesto para entrar.,I need to find the spare key to get in.
+INTRO_FIND_KEY_02,Él siempre la esconde muy mal.,He always hides it so badly.
+INTRO_CONTEXT_01,"Bien, aquí tengo que encontrar pistas de dónde está Ernesto.","Okay, I need to find clues about where Ernesto is. "
+INTRO_CONTEXT_02,No es normal que desaparezca de la nada.,It’s not normal for him to just disappear like this.
+INTRO_SAFE_01,Seguro acá dentro encuentro algo de adónde se fue.,There’s probably something in here about where he went.
+INTRO_SAFE_02,Debió anotar el código en alguna parte;,He must’ve written the code down somewhere;
+INTRO_SAFE_03,siempre se le olvidan estas cosas.,he always forgets stuff like that.
+ITEM_PHOTO_01,Eh…¿quién le mandaría esto a Ernesto?,Huh… who would’ve sent this to Ernesto?
+ITEM_PHOTO_02,No esperaba que tuviese cosas así.,I didn’t expect him to have this kind of stuff.
+EVENT_PC,¿Dejó el PC prendido?,He left the PC on?
+EVENT_CHAT_PC_01,¿Por qué se hablan así?,Why are they talking like this?
+EVENT_CHAT_PC_02,¿Qué mierda pasó entre ellos?,What the hell happened between them?
+EVENT_LIGHT_01,"Ugh,¿ya anocheció?","Ugh, it is already dark out?"
+EVENT_LIGHT_02,No había notado que las luces estuvieron encendidas todo el tiempo…,I hadn’t noticed the lights had been on this whole time…
+ITEM_ROLL_OF_FILMS_01,"Es una foto sin revelar, y estos dibujos…","It’s an undeveloped photo, and these drawings…"
+EVENT_BLACKOUT_01,"Mierda, el apagón.","Shit, the blackout."
+EVENT_BLACKOUT_02,Lo olvidé por completo.,I completely forgot about it.
+EVENT_BLACKOUT_03,Necesito restablecer la luz.,I need to get the power back on.
+EVENT_REVEAL_PHOTO,¿Esa es… Sammy?,Is that… Sammy?
+INTERACT_WALL,…,…
+EVENT_OPEN_SAFE,¿Por qué tiene algo así?,Why does he have something like this?
+EVENT_SHIRT,Es un maldito…,This motherfucker…
+EVENT_FINAL_01,¿Noah?,Noah?
+EVENT_FINAL_02,¿Qué haces aquí?,What are you doing here?
+EVENT_FINAL_03,Después te iba a contest…,I was gonna text you lat…
+EVENT_FINAL_04,¿Por qué tienes eso?,Why do you have that?
+EVENT_FINAL_05,"Ey, no hagas nada apresurado…","Hey, don’t do anything rash…"
+LOCK_SAFE,Tengo que encontrar todos los dígitos antes de ingresar la contraseña.,I need to find all the digits before entering the password.
+LOCK_DOOR,Está cerrada.,It’s locked.
+LOCK_PHOTO,Primero necesito saber qué hay en esta foto.,"First, I need to know what’s in this photo."
+LOCK_PC,"Primero, la computadora…","First, the computer…"
+CHAT_01,Ya deja de negar que tb te gustó y deja de tratarme como una mrda cuando literalmente estoy siendo tan amable contigo. No entiendo pq no puedes simplemente admitir que soy buen tipo,"Stop denying u liked it, and stop treating me like shit when I'm literally being so nice to you. I don't get why you can't just admit I'm a good guy "
+CHAT_02,"Por favor, no quiero seguir hablando de esto. Si no te he bloqueado es solo pq eres el mejor amigo de Noah","Please, I don't wanna keep talking about this. If I haven't blocked u, it's only bc you're Noah's best friend "
+CHAT_03,"Mira, estoy intentando ser un buen tipo sí?, pero no estás siendo lógica","Look, I'm tryna be a good guy here, but u r not making any sense "
+CHAT_04,"tú sabes lo que hicimos, y si vas a fingir que nada de eso pasó solo pq estabas algo borracha entonces le contaré todo a Noah","u know what we did, and if you're gonna pretend none of it happened just bc you were a little drunk then I'll have to tell Noah evrythg "
+CHAT_05,"o sea, todo lo que aceptaste hacer, obvio…","Like, evrythg you agreed to do ofc... "
+CHAT_06,"Así que no me hagas quedar como el malo, pq no lo soy. Tú eres la que me está haciendo daño al actuar como si lo que tuvimos no hubiera significado nada","So don't make me out to be the bad guy, bc I'm not. U r the one hurting me by acting like what we had meant nothing "
+CHAT_07,Yo no acepté hacer nada. Tú sabías que no me estaba sintiendo bien después de esa bebida que me hiciste probar... pero no le digas nada a Noah por favor. Haré lo que pidas...,I didn't agree to anything. U knew I was feeling awful after that drink you made me try... but pls don't tell Noah. I'll do whatever you want... 

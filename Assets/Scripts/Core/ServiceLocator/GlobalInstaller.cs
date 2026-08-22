@@ -5,6 +5,8 @@ public class GlobalInstaller : MonoBehaviour
 {
     [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private TransitionManager _transitionManager;
+    [SerializeField] private LanguageHandler _languageHandler;
+    [SerializeField] private SettingsManager _settingsManager;
     [SerializeField] private bool _isDebug;
     //[SerializeField] private DialogueManager _dialogueManager;
     //[SerializeField] private AudioManager _audioManager;
@@ -18,7 +20,15 @@ public class GlobalInstaller : MonoBehaviour
         ServiceLocator.Instance.RegisterServices<TransitionManager>(_transitionManager);
         DontDestroyOnLoad(_transitionManager);
 
-        if(!_isDebug)
+        ServiceLocator.Instance.RegisterServices<SettingsManager>(_settingsManager);
+        DontDestroyOnLoad(_settingsManager);
+        _settingsManager.Init();
+
+        ServiceLocator.Instance.RegisterServices<LanguageHandler>(_languageHandler);
+        DontDestroyOnLoad(_languageHandler);
+        _languageHandler.Init(_settingsManager.Language);
+
+        if (!_isDebug)
         SceneManager.LoadScene("MainMenu");
 
         //ServiceLocator.Instance.RegisterServices<SettingsManager>(_settingsManager);
