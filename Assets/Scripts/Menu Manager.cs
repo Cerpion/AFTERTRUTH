@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     [Header("Screens")]
     [SerializeField] private GameObject mainMenuScreen;
     [SerializeField] private GameObject settingsScreen;
+    [SerializeField] private Button _es;
+    [SerializeField] private Button _en;
 
     [Header("Game")]
     [SerializeField] private string gameSceneName = "Game";
@@ -13,6 +16,18 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         ShowMainMenu();
+        _es.onClick.AddListener(Spanish);
+        _en.onClick.AddListener(English);
+    }
+
+    private void Spanish()
+    {
+        ServiceLocator.Instance.GetService<LanguageHandler>().SetLanguage("Spanish");
+    }
+
+    private void English()
+    {
+        ServiceLocator.Instance.GetService<LanguageHandler>().SetLanguage("English");
     }
 
     public void ShowMainMenu()
