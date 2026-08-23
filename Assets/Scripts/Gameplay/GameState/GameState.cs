@@ -11,6 +11,8 @@ public class GameState : MonoBehaviour
 {
     private StateMachine<GameStates> _stateMachine;
     [SerializeField] private Player _player;
+    [SerializeField] private CanvasGroup _cinematic;
+    [SerializeField] private CanvasGroup _inventory;
 
     private void Awake()
     {
@@ -21,8 +23,8 @@ public class GameState : MonoBehaviour
 
         _stateMachine = new StateMachine<GameStates>();
         _stateMachine.AddState(GameStates.Gameplay, new GamePlayState());
-        _stateMachine.AddState(GameStates.Puzzle, new InteractionState(_player));
-        _stateMachine.AddState(GameStates.Cinematic, new InteractionState(_player));
+        _stateMachine.AddState(GameStates.Puzzle, new InteractionState(_player, _inventory));
+        _stateMachine.AddState(GameStates.Cinematic, new CinematicState(_player, _cinematic, _inventory));
         _stateMachine.Initialize(GameStates.Gameplay);
     }
 
@@ -58,41 +60,62 @@ public class GamePlayState : State<GameStates>
 public class InteractionState : State<GameStates>
 {
     private readonly Player _player;
-    public InteractionState(Player player)
+    private readonly CanvasGroup _inventory;
+
+    public InteractionState(Player player, CanvasGroup inventory)
     {
         _player = player;
+        _inventory = inventory;
     }
 
     public override void OnEnter()
     {
         _player._lockMovement = true;
         _player.StopInput();
+        _inventory.LeanAlpha(0, 025f);
     }
 
     public override void OnExit()
     {
         _player._lockMovement = false;
         _player.StartInput();
+        _inventory.LeanAlpha(1, 025f);
     }
 }
 
 public class CinematicState : State<GameStates>
 {
     private readonly Player _player;
-    public CinematicState(Player player)
+    private readonly CanvasGroup _cinematic;
+    private readonly CanvasGroup _inventory;
+
+    public CinematicState(Player player, CanvasGroup cinematic, CanvasGroup inventory)
     {
         _player = player;
+        _cinematic = cinematic;
+        _inventory = inventory;
     }
 
     public override void OnEnter()
     {
         _player._lockMovement = true;
         _player.StopInput();
+
+        _cinematic.alpha = 0;
+        _cinematic.gameObject.SetActive(true);
+        _cinematic.LeanAlpha(1, 0.25f);
+
+        _inventory.LeanAlpha(0, 025f);
+
     }
 
     public override void OnExit()
     {
         _player._lockMovement = false;
         _player.StartInput();
+
+        _cinematic.LeanAlpha(0, 0.25f).setOnComplete(() => _cinematic.gameObject.SetActive(false));
+        _inventory.LeanAlpha(1, 025f);
+
     }
 }

@@ -162,4 +162,20 @@ public class Player : MonoBehaviour
         LeanTween.value(gameObject, 0f, 1f, 1f)
             .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
     }
+
+    public void ShowPhone()
+    {
+        _lightObject.gameObject.SetActive(true);
+        _playerAnimator.SetFloat("Speed", 0);
+
+        LeanTween.value(gameObject, 0f, 1f, 1f)
+            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
+    }
+
+    public void HidePhone()
+    {
+        LeanTween.value(gameObject, 1f, 0f, 1f)
+             .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); })
+             .setOnComplete(() => _lightObject.gameObject.SetActive(false));
+    }
 }
