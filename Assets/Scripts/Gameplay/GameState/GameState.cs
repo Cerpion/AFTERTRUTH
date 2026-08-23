@@ -72,14 +72,14 @@ public class InteractionState : State<GameStates>
     {
         _player._lockMovement = true;
         _player.StopInput();
-        _inventory.LeanAlpha(0, 025f);
+        _inventory.LeanAlpha(0, 0.25f);
     }
 
     public override void OnExit()
     {
         _player._lockMovement = false;
         _player.StartInput();
-        _inventory.LeanAlpha(1, 025f);
+        _inventory.LeanAlpha(1, 0.25f);
     }
 }
 
@@ -105,7 +105,7 @@ public class CinematicState : State<GameStates>
         _cinematic.gameObject.SetActive(true);
         _cinematic.LeanAlpha(1, 0.25f);
 
-        _inventory.LeanAlpha(0, 025f);
+        _inventory.LeanAlpha(0, 0.25f);
 
     }
 
@@ -115,7 +115,7 @@ public class CinematicState : State<GameStates>
         _player.StartInput();
 
         _cinematic.LeanAlpha(0, 0.25f).setOnComplete(() => _cinematic.gameObject.SetActive(false));
-        _inventory.LeanAlpha(1, 025f);
+        _inventory.LeanAlpha(1, 0.25f);
 
     }
 }
