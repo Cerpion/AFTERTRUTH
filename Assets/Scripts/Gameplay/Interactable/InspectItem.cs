@@ -20,7 +20,8 @@ public class InspectItem : Interactable
 
     public override void OnInteractionEnded()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
-        inspection.OnInspectionFinished -= StopInteraction;
+
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InspectPuzzle : Interactable
@@ -21,6 +20,9 @@ public class InspectPuzzle : Interactable
         inspection.StartInspect(_itemID.ID);
         inspection.OnInspectionFinished += StopInteraction;
         inspection.OnItemObtained += ItemObtained;
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowPuzzleControls();
     }
 
     public override void OnInteractionEnded()
@@ -28,6 +30,8 @@ public class InspectPuzzle : Interactable
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished -= StopInteraction;
         inspection.OnItemObtained -= ItemObtained;
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
     }
 
     private void ItemObtained()

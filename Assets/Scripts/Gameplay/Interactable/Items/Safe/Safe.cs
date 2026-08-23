@@ -62,6 +62,9 @@ public class Safe : Interactable
         _currentInput = "";
         UpdateInputText();
 
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowKeyControls();
+
         //if (_failState != null)
         //    _failState.SetActive(false);
 
@@ -71,6 +74,8 @@ public class Safe : Interactable
 
     public override void OnInteractionEnded()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
         _canvas.SetActive(false);
 
         _currentInput = "";

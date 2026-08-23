@@ -22,6 +22,10 @@ public class MusicBoxClosed : State<MusicBoxState>
 
     public override void OnEnter()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowMusicBoxControls();
+
+
         var input = ServiceLocator.Instance.GetService<InputHandler>();
 
         input.OnLeftButton += MoveLeft;
@@ -35,6 +39,8 @@ public class MusicBoxClosed : State<MusicBoxState>
         input.OnLeftButton -= MoveLeft;
         input.OnRightButton -= MoveRight;
         input.OnInteract -= ExitInteraction;
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
 
         Reset();
     }

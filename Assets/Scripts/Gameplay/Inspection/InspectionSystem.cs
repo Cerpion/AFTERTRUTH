@@ -55,10 +55,14 @@ public class InspectionSystem : MonoBehaviour
 
         _currentItem = _interactiveItemFactory.GetItemByID(itemID);
         _currentItem.gameObject.SetActive(true);
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowPhotoControls();
     }
 
     public void EndInspect()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

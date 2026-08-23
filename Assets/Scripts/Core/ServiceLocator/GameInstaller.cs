@@ -6,6 +6,7 @@ public class GameInstaller : MonoBehaviour
     [SerializeField] private InspectionSystem _inspectionSystem;
     [SerializeField] private GameState _gameState;
     [SerializeField] private Player _player;
+    [SerializeField] private ItemsMovement _itemsMovement;
 
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class GameInstaller : MonoBehaviour
        ServiceLocator.Instance.RegisterServices<InspectionSystem>(_inspectionSystem);
        ServiceLocator.Instance.RegisterServices<GameState>(_gameState);
        ServiceLocator.Instance.RegisterServices<Player>(_player);
+       ServiceLocator.Instance.RegisterServices<ItemsMovement>(_itemsMovement);
     }
 
     private void OnDestroy()
@@ -20,6 +22,7 @@ public class GameInstaller : MonoBehaviour
         ServiceLocator.Instance.UnregisterService<InspectionSystem>();
         ServiceLocator.Instance.UnregisterService<GameState>();
         ServiceLocator.Instance.UnregisterService<Player>();
+        ServiceLocator.Instance.UnregisterService<ItemsMovement>();
     }
 }
 

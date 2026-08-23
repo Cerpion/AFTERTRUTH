@@ -6,7 +6,6 @@ public class TransitionManager : MonoBehaviour
 {
     [Header("Fade")]
     [SerializeField] private CanvasGroup _fade;
-    [SerializeField] private float _fadeDuration = 0.5f;
 
     [Header("Scenes")]
     [SerializeField] private string _mainMenuScene = "MainMenu";

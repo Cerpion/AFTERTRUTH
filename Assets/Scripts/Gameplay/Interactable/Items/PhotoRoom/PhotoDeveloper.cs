@@ -143,7 +143,7 @@ public class EmptyState : State<PhotoDeveloperState>
 {
 }
 
-    public class DevelopingState : State<PhotoDeveloperState>
+public class DevelopingState : State<PhotoDeveloperState>
 {
     private readonly Action OnExitInteraction;
     private readonly LayerMask _liquidLayer;
@@ -181,10 +181,17 @@ public class EmptyState : State<PhotoDeveloperState>
 
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract += ExitInteraction;
+
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowPuzzleControls();
     }
 
     public override void OnExit()
     {
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract -= ExitInteraction;
     }
@@ -347,10 +354,15 @@ public class CompletedState : State<PhotoDeveloperState>
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished += FinishInspection;
         inspection.StartInspect(_item.ID);
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().BackUI();
     }
 
     public override void OnExit()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
         _photo.gameObject.SetActive(false);
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished -= FinishInspection;
@@ -385,7 +397,7 @@ public class FillingLiquidsState : State<PhotoDeveloperState>
     {
         OnExitInteraction = onExitInteraction;
         _camera = Camera.main;
-        _liquidLayer= liquidLayer;
+        _liquidLayer = liquidLayer;
         _liquids = liquids;
     }
 
@@ -393,10 +405,14 @@ public class FillingLiquidsState : State<PhotoDeveloperState>
     {
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract += ExitInteraction;
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowPuzzleControls();
     }
 
     public override void OnExit()
     {
+
         if (_points < 3)
         {
             foreach (var liquid in _liquids)
@@ -410,6 +426,8 @@ public class FillingLiquidsState : State<PhotoDeveloperState>
 
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract -= ExitInteraction;
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
     }
 
     public void ExitInteraction()
@@ -514,6 +532,7 @@ public class FillingLiquidsState : State<PhotoDeveloperState>
 
         if (_points >= _liquids.Length)
         {
+            ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
             ChangeState.Invoke(PhotoDeveloperState.Developing);
             return;
         }

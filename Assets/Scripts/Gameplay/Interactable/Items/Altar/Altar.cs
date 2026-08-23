@@ -10,12 +10,17 @@ public class Altar : Interactable
 
     public override void OnInteractionStarted()
     {
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().BackUI();
+
         DialogueManager.Instance.Play(_dialogue);
         OnInteracted?.Invoke();
     }
 
     public override void OnInteractionEnded()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
     }
 
 

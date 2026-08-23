@@ -15,10 +15,15 @@ public class FuseBox : Interactable
     {
         _canUpdate = true;
         _flowGame.Finish += OnLight;
+
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowPuzzleControls();
     }
 
     public override void OnInteractionEnded()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
         _canUpdate = false;
         _flowGame.Finish -= OnLight;
     }

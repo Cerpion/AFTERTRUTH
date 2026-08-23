@@ -563,6 +563,10 @@ MonoBehaviour:
     lines:
     - LOCK_TRAYS_REVEAL
     timeBetweenLines: 2
+  - dialogueName: REPLIAPP
+    lines:
+    - REPLIAPP
+    timeBetweenLines: 2
   dialogueContainer: {fileID: 1018017559}
   dialogueText: {fileID: 1253308505}
   charactersPerSecond: 20
@@ -981,7 +985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TransitionManager
   _fade: {fileID: 1363339263}
-  _fadeDuration: 0.5
   _mainMenuScene: MainMenu
   _gameplayScene: Gameplay
   _firstEnding: FirstEnding

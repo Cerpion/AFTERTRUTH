@@ -11,12 +11,17 @@ public class MusicBoxOpen : State<MusicBoxState>
 
     public override void OnEnter()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
+        ServiceLocator.Instance.GetService<ItemsMovement>().BackUI();
+
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract += ExitInteraction;
     }
 
     public override void OnExit()
     {
+        ServiceLocator.Instance.GetService<ItemsMovement>().HideUI();
+
         var input = ServiceLocator.Instance.GetService<InputHandler>();
         input.OnInteract -= ExitInteraction;
     }
