@@ -26,7 +26,7 @@ public class BlackoutEvent : EventCinematic
         _normalSwitch.SetActive(false);
         _InteractiveSwitch.SetActive(true);
 
-        _globalLightHandler.SetNight();
+        _globalLightHandler.SetBlackout();
 
         player.OnLight();
 

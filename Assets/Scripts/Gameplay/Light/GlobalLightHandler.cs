@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -26,6 +27,12 @@ public class GlobalLightHandler : MonoBehaviour
     //        SetDay();
     //    }
     //}
+
+    private async Awaitable Start()
+    {
+        await Awaitable.NextFrameAsync();
+        SetDay();
+    }
 
 
     public void SetDay()

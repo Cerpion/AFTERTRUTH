@@ -26,7 +26,7 @@ public class FuseBox : Interactable
     public void OnLight()
     {
         StopInteraction();
-        _globalLightHandler.SetDay();
+        _globalLightHandler.SetNight();
         var player = ServiceLocator.Instance.GetService<Player>();
         player.OffLight();
 
