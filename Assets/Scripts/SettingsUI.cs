@@ -9,23 +9,23 @@ public class SettingsUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SettingsManager.Instance == null)
-            return;
+        var settings = ServiceLocator.Instance.GetService<SettingsManager>();
 
-        mouseSensitivitySlider.value =
-            SettingsManager.Instance.MouseSensitivity;
+        mouseSensitivitySlider.value = settings.MouseSensitivity;
+        volumeSlider.value = settings.Volume;
 
-        volumeSlider.value =
-            SettingsManager.Instance.Volume;
+        mouseSensitivitySlider.onValueChanged.AddListener(SetMouseSensitivity);
     }
 
     public void SetMouseSensitivity(float value)
     {
-        SettingsManager.Instance.SetMouseSensitivity(value);
+        ServiceLocator.Instance.GetService<SettingsManager>().SetMouseSensitivity(value);
+        //SettingsManager.Instance.SetMouseSensitivity(value);
     }
 
     public void SetVolume(float value)
     {
-        SettingsManager.Instance.SetVolume(value);
+        ServiceLocator.Instance.GetService<SettingsManager>().SetVolume(value);
+        //SettingsManager.Instance.SetVolume(value);
     }
 }

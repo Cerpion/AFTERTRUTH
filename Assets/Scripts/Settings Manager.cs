@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class SettingsManager : MonoBehaviour
     public float Volume { get; private set; }
     public string Language { get; private set; }
 
+    public Action OnChangeSensitivity;
+
     public void Init()
     {
         LoadSettings();
@@ -27,8 +30,11 @@ public class SettingsManager : MonoBehaviour
     {
         MouseSensitivity = value;
 
+        Debug.Log(value);
+
         PlayerPrefs.SetFloat(MouseSensitivityKey, value);
         PlayerPrefs.Save();
+        OnChangeSensitivity?.Invoke();
     }
 
     public void SetVolume(float value)

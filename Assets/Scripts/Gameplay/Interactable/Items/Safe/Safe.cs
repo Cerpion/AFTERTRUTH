@@ -24,6 +24,7 @@ public class Safe : Interactable
     [SerializeField] private Animator _animator;
     [SerializeField] private ItemID _itemID;
     [SerializeField] private string _dialog;
+    [SerializeField] private GameObject _finalEvent;
 
     private string _currentInput = "";
     public override bool ShowCursor { get => true; }
@@ -155,9 +156,14 @@ public class Safe : Interactable
         _gun.SetActive(false);
         GetComponent<BoxCollider>().enabled = false;
         ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
+        //ServiceLocator.Instance.GetService<Player>().ShowGun();
 
         var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
         inspection.OnInspectionFinished -= EndInteractionSafe;
+
+        if(_finalEvent != null) 
+        _finalEvent.gameObject.SetActive(true);
+
         StopInteraction();
     }
 

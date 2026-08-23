@@ -42,7 +42,7 @@ public class Door : MonoBehaviour
 
     public void CloseDoor()
     {
-        _doorPivot.LeanRotateAroundLocal(Vector3.up, 0, 1f);
+        _doorPivot.LeanRotateY(0, 1f);
         _audioSource.clip = _open;
         _audioSource.Play();
     }

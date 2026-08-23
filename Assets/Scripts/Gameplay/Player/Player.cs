@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private GameObject _light;
+    [SerializeField] private GameObject _lightObject;
+    [SerializeField] private GameObject _GunObject;
 
 
     [SerializeField] private float _currentSpeed;
@@ -22,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _yVelocity;
     [SerializeField] private float _gravity;
 
-    [SerializeField] private float _sensitivity;
+    [SerializeField] private float _sensitivity = 14;
     [SerializeField] private float _pitch;
     [SerializeField] private float _acceleration;
 
@@ -33,9 +36,23 @@ public class Player : MonoBehaviour
         _currentSpeed = _normalSpeed;
         _inputHandler = ServiceLocator.Instance.GetService<InputHandler>();
 
+        ServiceLocator.Instance.GetService<SettingsManager>().OnChangeSensitivity += ChangeSetting;
+        _sensitivity = ServiceLocator.Instance.GetService<SettingsManager>().MouseSensitivity;
 
         StartInput();
     }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.GetService<SettingsManager>().OnChangeSensitivity -= ChangeSetting;
+    }
+    private void ChangeSetting()
+    {
+        _sensitivity = ServiceLocator.Instance.GetService<SettingsManager>().MouseSensitivity;
+        Debug.Log(_sensitivity);
+
+    }
+
 
     public void StartInput()
     {
@@ -121,6 +138,7 @@ public class Player : MonoBehaviour
 
     public void OnLight()
     {
+        _lightObject.gameObject.SetActive(true);
         _playerAnimator.SetFloat("Speed", 0);
 
         LeanTween.value(gameObject, 0f, 1f, 1f)
@@ -132,7 +150,16 @@ public class Player : MonoBehaviour
     {
         _light.SetActive(false);
         LeanTween.value(gameObject, 1f, 0f, 1f)
-            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
+            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); })
+            .setOnComplete(() => _lightObject.gameObject.SetActive(false));
     }
 
+    public void ShowGun()
+    {
+        _GunObject.gameObject.SetActive(true);
+        _playerAnimator.SetFloat("Speed", 0);
+
+        LeanTween.value(gameObject, 0f, 1f, 1f)
+            .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
+    }
 }

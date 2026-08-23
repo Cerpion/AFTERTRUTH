@@ -534,7 +534,7 @@ MonoBehaviour:
     - EVENT_FINAL_03
     - EVENT_FINAL_04
     - EVENT_FINAL_05
-    timeBetweenLines: 2
+    timeBetweenLines: 1.35
   - dialogueName: LOCK_SAFE
     lines:
     - LOCK_SAFE
@@ -554,6 +554,14 @@ MonoBehaviour:
   - dialogueName: LOCK_PC
     lines:
     - LOCK_PC
+    timeBetweenLines: 2
+  - dialogueName: LOCK_PHOTO_REVEAL
+    lines:
+    - LOCK_PHOTO_REVEAL
+    timeBetweenLines: 2
+  - dialogueName: LOCK_TRAYS_REVEAL
+    lines:
+    - LOCK_TRAYS_REVEAL
     timeBetweenLines: 2
   dialogueContainer: {fileID: 1018017559}
   dialogueText: {fileID: 1253308505}
@@ -976,6 +984,8 @@ MonoBehaviour:
   _fadeDuration: 0.5
   _mainMenuScene: MainMenu
   _gameplayScene: Gameplay
+  _firstEnding: FirstEnding
+  _secondEnding: SecondEnding
 --- !u!1001 &1488292390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1119,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad54c5e594c703747a5ad204a8f8e226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsManager
-  defaultMouseSensitivity: 1
+  defaultMouseSensitivity: 16
   defaultVolume: 1
   defaultLanguage: English
 --- !u!4 &1767332194
