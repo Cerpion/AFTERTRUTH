@@ -7,6 +7,7 @@ public class GlobalLightHandler : MonoBehaviour
 {
     [SerializeField] private BakeData _day;
     [SerializeField] private BakeData _night;
+    [SerializeField] private BakeData _blackout;
 
     //private void OnEnable()
     //{
@@ -35,6 +36,10 @@ public class GlobalLightHandler : MonoBehaviour
     public void SetNight()
     {
         ApplyBake(_night);
+    }
+    public void SetBlackout()
+    {
+        ApplyBake(_blackout);
     }
 
     private void ApplyBake(BakeData data)

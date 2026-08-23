@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PcScreen: MonoBehaviour
 {
+    [SerializeField] PC _pc;
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Button _password;
     [SerializeField] GameObject _passwordError;
@@ -42,6 +43,7 @@ public class PcScreen: MonoBehaviour
 
     public void ShowDesktopTwo()
     {
+        _pc.EndDay();
         _desktopOne.gameObject.SetActive(false);
         _desktopTwo.gameObject.SetActive(true);
     }

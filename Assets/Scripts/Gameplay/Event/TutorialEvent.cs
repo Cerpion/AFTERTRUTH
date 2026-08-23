@@ -14,13 +14,18 @@ public class EventCinematic : MonoBehaviour
     {
 
     }
+
+    public void DisableEvent()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 public class TutorialEvent : EventCinematic
 {
     [SerializeField] Door _gateway;
     [SerializeField] InspectPuzzle _rug;
-    [SerializeField] string _dialog;
+    [SerializeField] string _introContext;
 
     private void Start()
     {
@@ -36,12 +41,12 @@ public class TutorialEvent : EventCinematic
     private void interaction()
     {
         _rug.GetComponent<BoxCollider>().enabled = true;
-        DialogueManager.Instance.Play(_dialog);
     }
 
     public override void Execute()
     {
-
-        gameObject.SetActive(false);
+        DialogueManager.Instance.Play(_introContext);
+        _gateway.CloseDoor();
+        DisableEvent();
     }
 }

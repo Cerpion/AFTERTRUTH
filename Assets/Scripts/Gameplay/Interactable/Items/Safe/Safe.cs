@@ -16,8 +16,14 @@ public class Safe : Interactable
     [SerializeField] private Button[] _numberButtons;
 
     [Header("Result")]
-    [SerializeField] private GameObject _failState;
-    [SerializeField] private GameObject _winState;
+    //[SerializeField] private GameObject _failState;
+    //[SerializeField] private GameObject _winState;
+
+    [SerializeField] private GameObject _gun;
+    [SerializeField] private GameObject _shirt;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private ItemID _itemID;
+    [SerializeField] private string _dialog;
 
     private string _currentInput = "";
     public override bool ShowCursor { get => true; }
@@ -27,11 +33,13 @@ public class Safe : Interactable
     {
         _canvas.SetActive(false);
 
-        if (_failState != null)
-            _failState.SetActive(false);
+        _gun.SetActive(false);
+        _shirt.SetActive(false);
+        //if (_failState != null)
+        //    _failState.SetActive(false);
 
-        if (_winState != null)
-            _winState.SetActive(false);
+        //if (_winState != null)
+        //    _winState.SetActive(false);
 
         SetupNumberButtons();
     }
@@ -53,11 +61,11 @@ public class Safe : Interactable
         _currentInput = "";
         UpdateInputText();
 
-        if (_failState != null)
-            _failState.SetActive(false);
+        //if (_failState != null)
+        //    _failState.SetActive(false);
 
-        if (_winState != null)
-            _winState.SetActive(false);
+        //if (_winState != null)
+        //    _winState.SetActive(false);
     }
 
     public override void OnInteractionEnded()
@@ -105,25 +113,53 @@ public class Safe : Interactable
 
     private void Fail()
     {
-        if (_failState != null)
-            _failState.SetActive(true);
+        //if (_failState != null)
+        //    _failState.SetActive(true);
 
         _currentInput = "";
         UpdateInputText();
 
         Debug.Log("Fallaste");
-        DialogueManager.Instance.Play("Hola");
+        //DialogueManager.Instance.Play("Hola");
         StopInteraction();
     }
 
     private void Win()
     {
-        if (_winState != null)
-            _winState.SetActive(true);
+        //if (_winState != null)
+        //    _winState.SetActive(true);
 
-        Debug.Log("Ganaste");
-        DialogueManager.Instance.Play("Hola");
+        _canvas.SetActive(false);
+
+        DesactiveExitInteraction();
+
+        _gun.SetActive(true);
+        _shirt.SetActive(true);
+        _animator.Play("Open");
+
+        LeanTween.delayedCall(3f, GetWeapon);
+
+     
+    }
+
+    private void GetWeapon()
+    {
+        var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
+        inspection.StartInspect(_itemID.ID);
+        inspection.OnInspectionFinished += EndInteractionSafe;
+        DialogueManager.Instance.Play(_dialog);
+    }
+
+    private void EndInteractionSafe()
+    {
+        _gun.SetActive(false);
+        GetComponent<BoxCollider>().enabled = false;
+        ServiceLocator.Instance.GetService<Player>().Inventory.TryAdd(_itemID);
+
+        var inspection = ServiceLocator.Instance.GetService<InspectionSystem>();
+        inspection.OnInspectionFinished -= EndInteractionSafe;
         StopInteraction();
     }
+
 
 }

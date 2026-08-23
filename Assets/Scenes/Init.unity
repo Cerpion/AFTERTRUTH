@@ -543,6 +543,10 @@ MonoBehaviour:
     lines:
     - LOCK_DOOR
     timeBetweenLines: 2
+  - dialogueName: LOCK_DOOR_BLACKOUT
+    lines:
+    - LOCK_DOOR_BLACKOUT
+    timeBetweenLines: 2
   - dialogueName: LOCK_PHOTO
     lines:
     - LOCK_PHOTO

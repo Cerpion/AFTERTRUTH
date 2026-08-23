@@ -27,7 +27,6 @@ public class BlackoutEvent : EventCinematic
         _InteractiveSwitch.SetActive(true);
 
         _globalLightHandler.SetNight();
-        gameObject.SetActive(false);
 
         player.OnLight();
 
@@ -37,6 +36,7 @@ public class BlackoutEvent : EventCinematic
         DialogueManager.Instance.Play(_dialog);
 
         LeanTween.delayedCall(1.5f, () => { ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay); });
+        DisableEvent();
     }
 
 }

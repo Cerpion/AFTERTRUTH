@@ -1,11 +1,16 @@
+using System;
 using UnityEngine;
 
 public class PC : Interactable
 {
+    [SerializeField] GlobalLightHandler _globalLightHandler;
+
     public override bool ShowCursor => true;
     public PcScreen _pcScreen;
     public CanvasGroup _canvasGroup;
     public string _password;
+    public Action OnComplete;
+    public string _dayToNight;
 
     public override void OnInteractionStarted()
     {
@@ -51,4 +56,9 @@ public class PC : Interactable
         _pcScreen.ShowPasswordError();
     }
 
+    public void EndDay()
+    {
+        DialogueManager.Instance.Play(_dayToNight);
+        _globalLightHandler.SetNight();
+    }
 }

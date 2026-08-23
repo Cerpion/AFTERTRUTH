@@ -28,6 +28,7 @@ EVENT_FINAL_04,¿Por qué tienes eso?,Why do you have that?
 EVENT_FINAL_05,"Ey, no hagas nada apresurado…","Hey, don’t do anything rash…"
 LOCK_SAFE,Tengo que encontrar todos los dígitos antes de ingresar la contraseña.,I need to find all the digits before entering the password.
 LOCK_DOOR,Está cerrada.,It’s locked.
+LOCK_DOOR_BLACKOUT,Necesito restablecer la luz.,I need to get the power back on.
 LOCK_PHOTO,Primero necesito saber qué hay en esta foto.,"First, I need to know what’s in this photo."
 LOCK_PC,"Primero, la computadora…","First, the computer…"
 CHAT_01,Ya deja de negar que tb te gustó y deja de tratarme como una mrda cuando literalmente estoy siendo tan amable contigo. No entiendo pq no puedes simplemente admitir que soy buen tipo,"Stop denying u liked it, and stop treating me like shit when I'm literally being so nice to you. I don't get why you can't just admit I'm a good guy "
