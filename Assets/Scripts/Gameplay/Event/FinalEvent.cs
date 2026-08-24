@@ -22,8 +22,8 @@ public class FinalEvent : EventCinematic
 
     private void Awake()
     {
-        _goodFinal.onClick.AddListener(FirstEnding);
-        _badFinal.onClick.AddListener(SecondEnding);
+        _badFinal.onClick.AddListener(FirstEnding);
+        _goodFinal.onClick.AddListener(SecondEnding);
     }
 
     public override void Execute()
