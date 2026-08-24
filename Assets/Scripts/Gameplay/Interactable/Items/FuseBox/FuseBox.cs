@@ -5,10 +5,12 @@ public class FuseBox : Interactable
 {
     [SerializeField] private GlobalLightHandler _globalLightHandler;
     [SerializeField] private FlowGame _flowGame;
+    [SerializeField] private Animator _switchAnimation;
 
     [SerializeField] private GameObject _normalDoor;
     [SerializeField] private GameObject _lockedDoor;
     private bool _canUpdate;
+    private bool _isOpen;
     public override bool ShowCursor => true;
 
     public override void OnInteractionStarted()
@@ -18,6 +20,12 @@ public class FuseBox : Interactable
 
         ServiceLocator.Instance.GetService<ItemsMovement>().ShowUI();
         ServiceLocator.Instance.GetService<ItemsMovement>().ShowPuzzleControls();
+
+        if (!_isOpen)
+        {
+            _switchAnimation.Play("Open");
+            _isOpen = true;
+        }
     }
 
     public override void OnInteractionEnded()

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Languages
+{
+    English,
+    Spanish,
+}
+
 public class LanguageHandler : MonoBehaviour
 {
     [SerializeField] private TextAsset translationFile;

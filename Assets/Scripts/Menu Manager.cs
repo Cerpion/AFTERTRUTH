@@ -1,56 +1,68 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     [Header("Screens")]
-    [SerializeField] private GameObject mainMenuScreen;
-    [SerializeField] private GameObject settingsScreen;
-    [SerializeField] private Button _es;
-    [SerializeField] private Button _en;
-
-    [Header("Game")]
-    [SerializeField] private string gameSceneName = "Game";
-
-    private void Start()
-    {
-        ShowMainMenu();
-        _es.onClick.AddListener(Spanish);
-        _en.onClick.AddListener(English);
-    }
-
-    private void Spanish()
-    {
-        ServiceLocator.Instance.GetService<LanguageHandler>().SetLanguage("Spanish");
-    }
-
-    private void English()
-    {
-        ServiceLocator.Instance.GetService<LanguageHandler>().SetLanguage("English");
-    }
+    [SerializeField] private CanvasGroup mainMenuScreen;
+    [SerializeField] private CanvasGroup settingsScreen;
+    [SerializeField] private CanvasGroup _creditsScreen;
+    private const float FadeDuration = 0.25f;
 
     public void ShowMainMenu()
     {
-        mainMenuScreen.SetActive(true);
-        settingsScreen.SetActive(false);
+        ChangeScreen(settingsScreen, mainMenuScreen);
     }
 
     public void OpenSettings()
     {
-        mainMenuScreen.SetActive(false);
-        settingsScreen.SetActive(true);
+        ChangeScreen(mainMenuScreen, settingsScreen);
     }
 
     public void CloseSettings()
     {
-        mainMenuScreen.SetActive(true);
-        settingsScreen.SetActive(false);
+        ChangeScreen(settingsScreen, mainMenuScreen);
     }
+
+    public void OpenCredits()
+    {
+        LeanTween.cancel(_creditsScreen.gameObject);
+
+        _creditsScreen.gameObject.SetActive(true);
+        _creditsScreen.alpha = 0f;
+
+        LeanTween.alphaCanvas(_creditsScreen, 1f, FadeDuration);
+    }
+
+    public void CloseCredits()
+    {
+        LeanTween.cancel(_creditsScreen.gameObject);
+
+        LeanTween.alphaCanvas(_creditsScreen, 0f, FadeDuration)
+            .setOnComplete(() =>
+            {
+                _creditsScreen.gameObject.SetActive(false);
+            });
+    }
+
+    private void ChangeScreen(CanvasGroup from, CanvasGroup to)
+    {
+        LeanTween.cancel(from.gameObject);
+        LeanTween.cancel(to.gameObject);
+
+        to.gameObject.SetActive(true);
+
+        from.alpha = 1f;
+        to.alpha = 0f;
+
+        LeanTween.alphaCanvas(from, 0f, FadeDuration) .setOnComplete(() => { from.gameObject.SetActive(false); });
+        LeanTween.alphaCanvas(to, 1f, FadeDuration);
+    }
+
 
     public void StartGame()
     {
-        //SceneManager.LoadScene(gameSceneName);
         ServiceLocator.Instance.GetService<TransitionManager>().StartGame();
     }
 

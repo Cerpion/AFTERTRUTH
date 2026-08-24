@@ -5,11 +5,12 @@ public class Photo : MonoBehaviour
     public Liquids LiquidType { get; private set; }
 
     [SerializeField] private Liquids _initialLiquidType;
-    [SerializeField] private float _slotOffset = 0.1f;
+    private float _slotOffset = 0.1f;
 
     public SlotLiquidPhoto CurrentSlot { get; private set; }
 
     private Vector3 _originalPosition;
+    private float _yOffset = 0.2f;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class Photo : MonoBehaviour
     public void Drag(Vector3 position)
     {
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        transform.position = new Vector3(position.x, _originalPosition.y, position.z);
+        transform.position = new Vector3(position.x, _originalPosition.y + _yOffset, position.z);
     }
 
     public void Drop()

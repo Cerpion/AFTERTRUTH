@@ -29,7 +29,7 @@ public class GlobalInstaller : MonoBehaviour
         _languageHandler.Init(_settingsManager.Language);
 
         if (!_isDebug)
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Title");
 
         //ServiceLocator.Instance.RegisterServices<SettingsManager>(_settingsManager);
         //ServiceLocator.Instance.RegisterServices<AudioManager>(_audioManager);

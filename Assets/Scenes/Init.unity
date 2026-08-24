@@ -370,7 +370,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 25
   m_TargetDisplay: 0
 --- !u!1 &905021821
 GameObject:
@@ -567,7 +567,7 @@ MonoBehaviour:
     lines:
     - REPLIAPP
     timeBetweenLines: 2
-  dialogueContainer: {fileID: 1018017559}
+  dialogueContainer: {fileID: 1018017561}
   dialogueText: {fileID: 1253308505}
   charactersPerSecond: 20
 --- !u!1 &1018017559
@@ -579,6 +579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1018017560}
+  - component: {fileID: 1018017561}
   m_Layer: 0
   m_Name: DialogueContainer
   m_TagString: Untagged
@@ -606,6 +607,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1018017561
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018017559}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1083084002
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,7 +856,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1350490997
 GameObject:

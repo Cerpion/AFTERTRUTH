@@ -5,6 +5,7 @@ public class SafeBoxEvent : MonoBehaviour
     [SerializeField] Altar _altar;
     [SerializeField] GameObject _oldSafe;
     [SerializeField] GameObject _originalSafe;
+    [SerializeField] Door _doorDevelop;
 
     private void Start()
     {
@@ -22,5 +23,6 @@ public class SafeBoxEvent : MonoBehaviour
         _originalSafe.SetActive(true);
         _altar.OnInteracted -= UnlockSafe;
         gameObject.SetActive(false);
+        _doorDevelop.OpenDoor();
     }
 }

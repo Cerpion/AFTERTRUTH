@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     [Header("Pause UI")]
-    [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private GameObject pauseMainScreen;
-    [SerializeField] private GameObject pauseSettingsScreen;
+    [SerializeField] private CanvasGroup pauseScreen;
+    [SerializeField] private CanvasGroup pauseMainScreen;
+    [SerializeField] private CanvasGroup pauseSettingsScreen;
 
-    [Header("Scenes")]
-    [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [Header("Transition")]
+    [SerializeField] private float transitionDuration = 0.25f;
 
     private bool isPaused;
 
@@ -35,21 +35,34 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = true;
 
-        pauseScreen.SetActive(true);
-        pauseMainScreen.SetActive(true);
-        pauseSettingsScreen.SetActive(false);
+        pauseScreen.gameObject.SetActive(true);
+        pauseScreen.alpha = 0f;
+
+        pauseMainScreen.gameObject.SetActive(true);
+        pauseMainScreen.alpha = 1f;
+
+        pauseSettingsScreen.gameObject.SetActive(false);
 
         Time.timeScale = 0f;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        LeanTween.cancel(pauseScreen.gameObject);
+
+        LeanTween.alphaCanvas(pauseScreen, 1f, transitionDuration)
+            .setIgnoreTimeScale(true);
     }
 
     public void ResumeGame()
     {
         isPaused = false;
 
-        pauseScreen.SetActive(false);
+        LeanTween.cancel(pauseScreen.gameObject);
+
+        LeanTween.alphaCanvas(pauseScreen, 0f, transitionDuration)
+            .setIgnoreTimeScale(true)
+            .setOnComplete(() => { pauseScreen.gameObject.SetActive(false); });
 
         Time.timeScale = 1f;
 
@@ -59,15 +72,32 @@ public class PauseManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        pauseMainScreen.SetActive(false);
-        pauseSettingsScreen.SetActive(true);
+        ChangeScreen(pauseMainScreen, pauseSettingsScreen);
     }
 
     public void CloseSettings()
     {
-        pauseMainScreen.SetActive(true);
-        pauseSettingsScreen.SetActive(false);
+        ChangeScreen(pauseSettingsScreen, pauseMainScreen);
     }
+
+    private void ChangeScreen(CanvasGroup from, CanvasGroup to)
+    {
+        LeanTween.cancel(from.gameObject);
+        LeanTween.cancel(to.gameObject);
+
+        to.gameObject.SetActive(true);
+
+        from.alpha = 1f;
+        to.alpha = 0f;
+
+        LeanTween.alphaCanvas(from, 0f, transitionDuration)
+            .setIgnoreTimeScale(true)
+            .setOnComplete(() =>{from.gameObject.SetActive(false);});
+
+        LeanTween.alphaCanvas(to, 1f, transitionDuration)
+            .setIgnoreTimeScale(true);
+    }
+
 
     public void ReturnToMainMenu()
     {

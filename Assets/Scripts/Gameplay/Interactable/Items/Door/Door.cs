@@ -31,7 +31,7 @@ public class Door : MonoBehaviour
         _interactable.OnLocked += DoorLock;
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         var rotation = _openDirection == DoorOpen.Outside ? 90 : -90;
         _doorPivot.LeanRotateAroundLocal(Vector3.up, rotation, 1f);

@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
 
     [Header("UI")]
-    [SerializeField] private GameObject dialogueContainer;
+    [SerializeField] private CanvasGroup dialogueContainer;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
     [Header("Typewriter")]
@@ -48,7 +48,8 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        dialogueContainer.SetActive(false);
+        dialogueContainer.gameObject.SetActive(false);
+        dialogueContainer.alpha = 0;
     }
 
     private void Update()
@@ -109,7 +110,9 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
         dialogueFinished = false;
 
-        dialogueContainer.SetActive(false);
+        LeanTween.cancel(dialogueContainer.gameObject);
+        dialogueContainer.LeanAlpha(0, 0.15f)
+            .setOnComplete(() => {dialogueContainer.gameObject.SetActive(false); });
     }
 
     public bool IsPlaying()
@@ -137,7 +140,11 @@ public class DialogueManager : MonoBehaviour
 
         dialogueFinished = false;
 
-        dialogueContainer.SetActive(true);
+        LeanTween.cancel(dialogueContainer.gameObject);
+        dialogueContainer.alpha = 0;
+        dialogueContainer.gameObject.SetActive(true);
+        dialogueContainer.LeanAlpha(1, 0.15f);
+
 
         dialogueCoroutine = StartCoroutine(PlayDialogue());
     }
@@ -147,10 +154,9 @@ public class DialogueManager : MonoBehaviour
         while (currentLineIndex < currentDialogue.lines.Count)
         {
             // Show current line
-            yield return StartCoroutine(ShowLine());
-
+            yield return ShowLine();
             // Wait after the line has finished typing
-            yield return new WaitForSecondsRealtime(
+            yield return new WaitForSeconds(
                 currentDialogue.timeBetweenLines
             );
 
@@ -181,7 +187,7 @@ public class DialogueManager : MonoBehaviour
 
             float delay = 1f / charactersPerSecond;
 
-            yield return new WaitForSecondsRealtime(delay);
+            yield return new WaitForSeconds(delay);
         }
 
         isTyping = false;
