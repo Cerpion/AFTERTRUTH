@@ -3,7 +3,27 @@ guid: 7171c1a2a786c8743a3510cb6aa9d9da
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Safe_Num_Pad
+    second: {fileID: 2100000, guid: 07e3723cffe37084fb15998b09950189, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Safe_Opening
+    second: {fileID: 2100000, guid: 6c5fc3f77c15a1045904b314a5c8a44b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Safe_Shape
+    second: {fileID: 2100000, guid: 9012f51f156d2484a9c6256f4700d118, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Safe_Wheel
+    second: {fileID: 2100000, guid: 96a3a2d1cea1d4940880ac717e7dc5e7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

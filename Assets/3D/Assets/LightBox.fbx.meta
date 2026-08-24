@@ -3,7 +3,27 @@ guid: b696df545d16e2146b90028d0aa7b9ef
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoxLight_01
+    second: {fileID: 2100000, guid: 56798c070fd081a429ffe2a7a6bbe63f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightBox
+    second: {fileID: 2100000, guid: 503c9bd047ff86d49b2448a00afa6c96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PanelDoor
+    second: {fileID: 2100000, guid: 2ed93f4787d7c924d8408bf7e05c5186, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Switches
+    second: {fileID: 2100000, guid: a2f994cffeb0e6f41b10c17bd1f128b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
