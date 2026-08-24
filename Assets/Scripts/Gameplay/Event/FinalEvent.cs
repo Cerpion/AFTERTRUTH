@@ -71,13 +71,11 @@ public class FinalEvent : EventCinematic
 
     public void FirstEnding()
     {
-        ServiceLocator.Instance.GetService<TransitionManager>().ReturnToMainMenu();
-        //ServiceLocator.Instance.GetService<TransitionManager>().FirstEnding();
+        ServiceLocator.Instance.GetService<TransitionManager>().FirstEnding();
     }
 
     public void SecondEnding()
     {
-        ServiceLocator.Instance.GetService<TransitionManager>().ReturnToMainMenu();
-        //ServiceLocator.Instance.GetService<TransitionManager>().SecondEnding();
+        ServiceLocator.Instance.GetService<TransitionManager>().SecondEnding();
     }
 }
