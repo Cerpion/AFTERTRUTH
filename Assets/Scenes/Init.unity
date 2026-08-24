@@ -567,6 +567,10 @@ MonoBehaviour:
     lines:
     - REPLIAPP
     timeBetweenLines: 2
+  - dialogueName: BREAD
+    lines:
+    - BREAD
+    timeBetweenLines: 2
   dialogueContainer: {fileID: 1018017561}
   dialogueText: {fileID: 1253308505}
   charactersPerSecond: 20
