@@ -8860,7 +8860,7 @@ MonoBehaviour:
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.05}
   m_Size: {x: 0.5, y: 0.5, z: 0.1}
-  m_FadeFactor: 0.1
+  m_FadeFactor: 0.005
   version: 1
   m_DecalLayerMask: 1
 --- !u!1 &249221962
@@ -43892,7 +43892,7 @@ MonoBehaviour:
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.075}
   m_Size: {x: 0.5, y: 0.5, z: 0.15}
-  m_FadeFactor: 0.2
+  m_FadeFactor: 0.005
   version: 1
   m_DecalLayerMask: 1
 --- !u!1 &1163133546
