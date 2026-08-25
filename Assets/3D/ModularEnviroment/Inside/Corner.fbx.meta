@@ -3,7 +3,12 @@ guid: 1fd57d24ab15d9a4f9f146e39891708b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallApto
+    second: {fileID: 2100000, guid: bbe5c6dd3867df648baa4eb9b82d8b1e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

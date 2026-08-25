@@ -3,7 +3,22 @@ guid: bb9ce6513bacb92488ed6baff027d78a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Desk
+    second: {fileID: 2100000, guid: d263c63dacf34704ea72bf2af8fc3bdd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallApto
+    second: {fileID: 2100000, guid: bbe5c6dd3867df648baa4eb9b82d8b1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallHallway
+    second: {fileID: 2100000, guid: efc83843860c5ac4e84a653a3b4d95e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
