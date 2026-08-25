@@ -16,6 +16,11 @@ public class FinalEvent : EventCinematic
     [SerializeField] private Transform _point01;
     [SerializeField] private Transform _point02;
 
+    [SerializeField] private GameObject _inventory;
+    [SerializeField] private GameObject _pointShoot;
+    [SerializeField] private GameObject _blackCanvas;
+    [SerializeField] private EnemyScared _enemyScared;
+
 
     private float _moveSpeed = 1f;
     private float _rotationDuration = 1f;
@@ -71,11 +76,47 @@ public class FinalEvent : EventCinematic
 
     public void FirstEnding()
     {
-        ServiceLocator.Instance.GetService<TransitionManager>().FirstEnding();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        ServiceLocator.Instance.GetService<GameState>().ChangeState(GameStates.Gameplay);
+        _finalDesicionUI.SetActive(false);
+        _inventory.SetActive(false);
+
+        var player = ServiceLocator.Instance.GetService<Player>();
+
+        player.ShooterMode();
+        player.OnTargetHit += ExecuteFinal;
+        _pointShoot.SetActive(true);
+
+        LeanTween.delayedCall(0.25f, () => { _enemyScared.StartScape = true; _enemyScared.ChooseNewHidePoint(); });
+    }
+
+    private void ExecuteFinal()
+    {
+        var sequence = LeanTween.sequence();
+
+        sequence.append(() => { _blackCanvas.gameObject.SetActive(true); });
+        sequence.append(1f);
+        sequence.append(() => { AudioManager.Instance.PlaySFX("Shot"); });
+        sequence.append(1.5f);
+
+        sequence.append(() => {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        });
+
+        sequence.append(() => { ServiceLocator.Instance.GetService<TransitionManager>().FirstEnding(); });
     }
 
     public void SecondEnding()
     {
-        ServiceLocator.Instance.GetService<TransitionManager>().SecondEnding();
+        //Dont shoot
+        var sequence = LeanTween.sequence();
+        var player = ServiceLocator.Instance.GetService<Player>();
+
+        sequence.append(() => { player.HideGun(); });
+        sequence.append(1.5f);
+        sequence.append(() => { ServiceLocator.Instance.GetService<TransitionManager>().SecondEnding(); });
     }
 }

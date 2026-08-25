@@ -1048,6 +1048,82 @@ PrefabInstance:
       propertyPath: gameSceneName
       value: Gameplay
       objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[0].id
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[1].id
+      value: CloseDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[2].id
+      value: LockDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[3].id
+      value: Paper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[4].id
+      value: PickupKeys
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[5].id
+      value: Shot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: debe77de513022b40bef8ae736120b02, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ca555b95d76d43949a7636ba2e6cacac, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5bdedab67b6c6454ab3a251baf50a15e, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 338b2acf7b25a7f48b8131347f193629, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e0b784bfbe0af44d83bad33167239b3, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bad2f1294f9889041962420ca9954ec0, type: 3}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914920057734585557, guid: d870027f64f34444cbc086a6e56b62b2, type: 3}
+      propertyPath: soundEffects.Array.data[5].volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

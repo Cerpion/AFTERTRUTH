@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7eef608b4855dc4b923a0aac363e80c, type: 3}
   m_Name: Key_PhotoNotDeveloped
   m_EditorClassIdentifier: Assembly-CSharp::ItemID
-  ID: Key_PhotoDeveloped
+  ID: Key_PhotoNotDeveloped

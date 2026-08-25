@@ -36,15 +36,13 @@ public class Door : MonoBehaviour
         var rotation = _openDirection == DoorOpen.Outside ? 90 : -90;
         _doorPivot.LeanRotateAroundLocal(Vector3.up, rotation, 1f);
 
-        _audioSource.clip = _open;
-        _audioSource.Play();
+        AudioManager.Instance.PlaySFX("OpenDoor");
     }
 
     public void CloseDoor()
     {
         _doorPivot.LeanRotateY(0, 1f);
-        _audioSource.clip = _open;
-        _audioSource.Play();
+        AudioManager.Instance.PlaySFX("CloseDoor");
     }
 
     private void DoorLock()
@@ -52,9 +50,7 @@ public class Door : MonoBehaviour
         if(_information != string.Empty)
         DialogueManager.Instance.Play(_information);
 
-        _audioSource.clip = _locked;
-        _audioSource.Play();
-
+        AudioManager.Instance.PlaySFX("LockDoor");
         OnDoorLock?.Invoke();
     }
 }

@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractiveItemsConfiguration
   NormalItems:
   - ItemID: {fileID: 11400000, guid: 05d8e6b39ebd87f46b770fa8d3f1cfe4, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 442168337, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
   - ItemID: {fileID: 11400000, guid: 6855855ef8eb2a645badbdcf64ee2448, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 442168337, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
   - ItemID: {fileID: 11400000, guid: 5c69eac80a02e7c4db9edbc825eefd41, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 442168337, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: 8135a9a450e816448b7a054df7b556b1, type: 3}
   - ItemID: {fileID: 11400000, guid: 28711923ecbcaf44b98d36f9e92601a7, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: -169189982, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: b39f0ed2724c93644ba59673892c9016, type: 3}
   - ItemID: {fileID: 11400000, guid: 85d3c5d3af8d2bf41821d405e690af27, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 1914316390, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: f4f72fb6ad2f4ee4190c42ad5d84f6cf, type: 3}
   - ItemID: {fileID: 11400000, guid: ea922444b95d6d04b8bb5c349d0a0660, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 21300000, guid: 160a0141ca9c2314aa831348dc39107b, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: 5b89863213471bb46b063a6f7aa67772, type: 3}
   - ItemID: {fileID: 11400000, guid: 7c35ba37b3051bf45aca47350912c402, type: 2}
-    Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    Icon: {fileID: 1021093370, guid: 675c68ed0a993af42a1b32836345da17, type: 3}
     Prefab: {fileID: 4995329718186124538, guid: ade1a7a8c5726964eaca14a75c47d2fb, type: 3}
   InteractiveItems:
   - ItemID: {fileID: 11400000, guid: 70148b67fe1ec1746a091051fd1e3db3, type: 2}
@@ -50,3 +50,6 @@ MonoBehaviour:
   - ItemID: {fileID: 11400000, guid: c6dda486e61746443abebf3c783b0c73, type: 2}
     Icon: {fileID: 0}
     Prefab: {fileID: 3521668037421938881, guid: b8abfeee2d6cbf14cb0ebfb8bf930130, type: 3}
+  - ItemID: {fileID: 11400000, guid: 4f8d7515b5da07f47869232ceee71cf8, type: 2}
+    Icon: {fileID: 0}
+    Prefab: {fileID: 4995329718186124538, guid: 8d7636e32437c884f8d1f8a6228ba648, type: 3}

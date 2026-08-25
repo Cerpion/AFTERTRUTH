@@ -1,3 +1,5 @@
+using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _acceleration;
 
     public bool _lockMovement;
+    public Action OnTargetHit;
+    [SerializeField] private CinemachineImpulseSource _impulse;
 
     public void Start()
     {
@@ -157,10 +161,15 @@ public class Player : MonoBehaviour
     public void ShowGun()
     {
         _GunObject.gameObject.SetActive(true);
-        _playerAnimator.SetFloat("Speed", 0);
 
         LeanTween.value(gameObject, 0f, 1f, 1f)
             .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); });
+    }
+    public void HideGun()
+    {
+        LeanTween.value(gameObject, 1f, 0f, 1f)
+             .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); })
+             .setOnComplete(() => _GunObject.gameObject.SetActive(false));
     }
 
     public void ShowPhone()
@@ -177,5 +186,32 @@ public class Player : MonoBehaviour
         LeanTween.value(gameObject, 1f, 0f, 1f)
              .setOnUpdate(value => { _playerAnimator.SetLayerWeight(1, value); })
              .setOnComplete(() => _lightObject.gameObject.SetActive(false));
+    }
+
+
+    public void ShooterMode()
+    {
+        _inputHandler.OnInteract -= Interact;
+        _inputHandler.OnInteract += ShootEnemy;
+        _interactionCheck.DeactivateInteraction();
+    }
+
+    public void ShootEnemy()
+    {
+        Ray ray = new Ray(
+         _camera.transform.position,
+         _camera.transform.forward
+     );
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        {
+            if (hit.collider.CompareTag("Finish"))
+            {
+                OnTargetHit?.Invoke();
+                return;
+            }
+        }
+
+        _impulse.GenerateImpulse();
     }
 }

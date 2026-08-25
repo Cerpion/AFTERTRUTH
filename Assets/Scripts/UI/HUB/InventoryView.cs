@@ -7,6 +7,7 @@ public class InventoryView : MonoBehaviour
     public void UpdateView (int index, Sprite sprite)
     {
         _itemImage[index].sprite = sprite;
+        _itemImage[index].GetComponent<CanvasGroup>().alpha = 1;
     }
 
     public void Reset()
@@ -14,6 +15,7 @@ public class InventoryView : MonoBehaviour
         foreach (var item in _itemImage)
         {
             item.sprite = null;
+            item.GetComponent<CanvasGroup>().alpha = 0 ;
         } 
     }
 }
